@@ -16,6 +16,7 @@
         foreach ($row as &$value)
             echo("<option value=".$value[id].">".$value[name]."</option>");
         unset($value);
+        $topics->close();
   }
 
   function region_selection()
@@ -34,6 +35,7 @@
       foreach ($row as &$val)
           echo ("<option value=".$val[id].">".$val[name]."</option>");
       unset($val);
+      $region->close();
   }
 
 ?>

@@ -24,6 +24,7 @@
             $result = array( "res" => "ok");
         else
             $result = array( "res" => "not ok");
+        $suggest_db->close();
         echo json_encode($result);
         exit();
     }
