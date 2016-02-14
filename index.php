@@ -66,6 +66,6 @@
 
     <div class="modal" id="advertisment" style="display: none">
         <a href="#" class="close">&times;</a>
-        test your luck
+        test your luck and might
     </div>-->
 </body>
