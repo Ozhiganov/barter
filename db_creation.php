@@ -12,7 +12,16 @@ if ($create_table->connect_errno) {
     echo "Не удалось подключиться:".$create_table->connect_error;
     exit();
 }
-$create_table->query("CREATE TABLE topics (
+//TODO: It's Not over yet: phone_number, region, city, reg_date?, auth_date?,
+$create_table->query("CREATE TABLE IF NOT EXISTS `users`(
+id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(32) NOT NULL,
+login VARCHAR(32) UNIQUE  NOT NULL,
+password VARCHAR(32) NOT NULL,
+email VARCHAR(32) UNIQUE NOT NULL
+)");
+
+$create_table->query("CREATE TABLE `topics` (
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 name TEXT NOT NULL
 )");
