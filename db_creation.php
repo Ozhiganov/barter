@@ -39,6 +39,19 @@ city INT(11),
 price INT(11)
 )");
 
+//Users tables
+$create_table -> query("CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `login` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `email` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login` (`login`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
+
+
 $handle = @fopen("regions.txt", "r");
 $buffer = fgets($handle, 4096);
 $create_table->set_charset("utf8");

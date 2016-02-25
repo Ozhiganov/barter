@@ -74,6 +74,46 @@
         </div>
     </div>
 
+    <!--sign in && sign up-->
+    <div>
+        <!--<button id="show_sign_in"></button>-->
+        <div id="hidden_sign_in_form" style="">
+            <h2>Авторизация</h2>
+            <form action="sign_in.php" method="post">
+                <label for="login">Логин</label>
+                <input type="text" name="login"  id='login' autocomplete="off" required>
+                <br><br>
+                <label for="password">Пароль</label>
+                <input type="password" name="password" id='password' autocomplete="off" required>
+                <br><br>
+
+                <input type="submit" name="hidden_sign_in_form" value="Авторизоваться">
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <!--<button id="show_sign_up"></button>-->
+        <div id="hidden_sign_up_form" style="">
+            <h2>Регистрация</h2>
+            <form action="sign_up.php" method="post">
+                <label for="username">Имя</label>
+                <input type="text" name="username" id="username" placeholder="" required>
+                <br><br>
+                <label for="login">Логин</label>
+                <input type="text" name="login"  id='login' autocomplete="off" required>
+                <br><br>
+                <label for="password">Пароль</label>
+                <input type="password" name="password" id='password' autocomplete="off" required>
+                <br><br>
+                <label for="password_check">Повторите пароль</label>
+                <input type="password" name="password_check" id="password_check" autocomplete="off" required>
+                <br><br>
+
+                <input type="submit" name="submit_sign_up" value="Зарегистрироваться">
+            </form>
+        </div>
+    </div>
    <!-- <button id="advertisment-open">place an advertisement</button>
 
     <div class="modal" id="advertisment" style="display: none">
