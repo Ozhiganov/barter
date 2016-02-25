@@ -11,6 +11,7 @@
     <div id="find_area">
         <button id="find_btn">find an advertisement</button>
         <div id="find_form_div" style="display: none">
+            <form id="find_form">
                 <br>From
                 <select id="from_topics_of_barter_find">
                     <?php
@@ -20,13 +21,21 @@
                 </select>
                 <br>To
                 <select id="to_topics_of_barter_find">
-                    <?php
-                    barter_topics();
-                    ?>
+                    <?php barter_topics(); ?>
                 </select>
                 <br>Keywords
-                <input type="text" id="description_find"/>
-<!--                TODO: Add region and city selection-->
+                <input type="text" id="description_find" autocomplete="off"/>
+                <br>Region
+                <select id="region_find">
+                    <option value="0">Вся Россия</option>
+                    <?php region_selection() ?>
+                </select>
+                <br>City
+                <input list="city_find" id="city_selected_find" autocomplete="off">
+                <datalist id="city_find" autocomplete="off">
+                </datalist>
+                <input type="submit" id="submit_find"/>
+            </form>
         </div>
         <br>
     </div>
@@ -57,10 +66,10 @@
                     <?php region_selection() ?>
                 </select>
                 <br>City
-                <input list="city" id="city_selected" required autocomplete="off">
-                <datalist id="city" autocomplete="off">
+                <input list="city_suggest" id="city_selected_suggest" required autocomplete="off">
+                <datalist id="city_suggest" autocomplete="off">
                 </datalist>
-                <input type="submit" id="sub_btn"/>
+                <input type="submit" id="submit_suggest"/>
             </form>
         </div>
     </div>
