@@ -4,9 +4,29 @@ jQuery(function($){
         $("#find_form_div").css("display", "block").hide().fadeIn(500);
         $("#suggest_div").css("display", "none")
     });
+    $('body').on('change','#region_suggest',function(){
+       var data = {
+           'region': $("#region_suggest option:selected").val()
+       };
+       $.ajax({
+            type: 'POST',
+            url: 'queries.php',
+            dataType: 'json',
+            data: "region="+JSON.stringify(data),
+            success: function(html) {
+                var html_string = "";
+                for (var i in html) {
+                    html_string+="<option value="+html[i][0]+" id="+html[i][1]+"></option>";
+                }
+                $("#city").html(html_string);
+            }
+        });
+
+    });
     $('body').on('click', '#suggest_btn', function () {
         $("#find_form_div").css("display", "none");
         $("#suggest_div").css("display", "block").hide().fadeIn(500);
+        $('#region_suggest').trigger('change');
     })
     $('body').on('submit', '#suggest_form', function () {
         var data = {
@@ -17,8 +37,9 @@ jQuery(function($){
             'contacts': $("#contacts_suggest").val(),
             'name': $("#name_suggest").val(),
             'price': $("#price_suggest").val(),
-            'region': $("#region_suggest option:selected").val()
-        }
+            'region': $("#region_suggest option:selected").val(),
+            'city': $("#city_selected").val()
+        };
         $.ajax({
             type: 'POST',
             url: 'queries.php',

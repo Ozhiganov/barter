@@ -43,20 +43,23 @@
                     <?php barter_topics(); ?>
                 </select>
                 <br>Title
-                <input type="text" id="title_suggest" required/>
+                <input type="text" id="title_suggest" required autocomplete="off"/>
                 <br>Description
-                <input type="text" id="description_suggest" required/>
+                <input type="text" id="description_suggest" autocomplete="off" required/>
                 <br>Contacts
-                <input type="text" id="contacts_suggest" required/>
+                <input type="text" id="contacts_suggest" autocomplete="off" required/>
                 <br>Name
-                <input type="text" id="name_suggest" required/>
+                <input type="text" id="name_suggest" autocomplete="off" required/>
                 <br>Price
-                <input type="number" id="price_suggest" required/>
+                <input type="number" id="price_suggest" autocomplete="off" required/>
                 <br>Region
                 <select id="region_suggest">
                     <?php region_selection() ?>
                 </select>
-                <br>
+                <br>City
+                <input list="city" id="city_selected" required autocomplete="off">
+                <datalist id="city" autocomplete="off">
+                </datalist>
                 <input type="submit" id="sub_btn"/>
             </form>
         </div>
