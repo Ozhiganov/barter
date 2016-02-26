@@ -34,7 +34,8 @@
                 <input list="city_find" id="city_selected_find" autocomplete="off">
                 <datalist id="city_find" autocomplete="off">
                 </datalist>
-                <input type="submit" id="submit_find"/>
+                <br>
+                <input type="button" id="submit_find" value="search"/>
             </form>
         </div>
         <br>
@@ -73,7 +74,7 @@
             </form>
         </div>
     </div>
-
+    <div id="search_area"></div>
     <!--sign in && sign up-->
     <div>
         <!--<button id="show_sign_in"></button>-->

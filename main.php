@@ -2,7 +2,7 @@
     $suggest = array("suggest_from","suggest_to","title", "description", "contacts", "name", "price","region");
     function barter_topics()
     {
-        $topics = new mysqli("barter", "root", "", "main");
+        $topics = new mysqli("barter", "root", "", "barter_main");
 
         if ($topics->connect_errno) {
             //TODO: Handling the connection error
@@ -21,7 +21,7 @@
 
   function region_selection()
   {
-      $region = new mysqli("barter","root","","main");
+      $region = new mysqli("barter","root","","barter_main");
 
       if ($region->connect_errno)
       {

@@ -7,10 +7,10 @@ jQuery(function($){
         $('#region_find').trigger('change');
     });
     $('body').on('change','#region_suggest',function(){
-       var data = {
-           'region': $("#region_suggest option:selected").val()
-       };
-       $.ajax({
+        var data = {
+            'region': $("#region_suggest option:selected").val()
+        };
+        $.ajax({
             type: 'POST',
             url: 'queries.php',
             dataType: 'json',
@@ -80,22 +80,41 @@ jQuery(function($){
         });
 
     });
-    $('body').on('submit','#find_form', function () {
-        var data = {
+    $('body').on('click','#submit_find', function () {
+        var data_request = {
             'find_from': $("#from_topics_of_barter_find option:selected").val(),
             'find_to': $("#to_topics_of_barter_find option:selected").val(),
             'keywords': $("#description_find").val(),
             'region': $("#region_find option:selected").val(),
             'city': $("#city_selected_find").val()
         };
+        var search_data = {
+            'find_from': $("#from_topics_of_barter_find option:selected").text(),
+            'find_to': $("#to_topics_of_barter_find option:selected").text(),
+            'region': $("#region_find option:selected").text(),
+            'city': $("#city_selected_find").val()
+        };
         $.ajax({
             type: 'POST',
             url: 'queries.php',
             dataType: 'json',
-            data: "find="+JSON.stringify(data),
+            data: "find="+JSON.stringify(data_request),
             success: function(html) {
-                for (var i in html)
-                 alert(html[i]['name']);
+                $("#suggest_area").css("display","none");
+                var search_result = "";
+                for (var i in html) {
+                    var current = html[i];
+                    search_result += "<div>" +
+                    "<div align='center'>" + current['title'] + "</div>" +
+                    "From:"+search_data['find_from']+"<br>" +
+                    "To:"+search_data['find_to']+"<br>" +
+                    "Region:"+search_data['region']+"<br>" +
+                    "Description:"+current['description']+"<br>" +
+                    "Contacts:"+current['contacts']+"<br>" +
+                    "Name:"+current['name']+"<br></div>";
+                }
+                $("#search_area").html(search_result);
+
             }
         });
     });
