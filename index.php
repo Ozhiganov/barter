@@ -103,6 +103,9 @@
                 <label for="login">Логин</label>
                 <input type="text" name="login"  id='login' autocomplete="off" required>
                 <br><br>
+                <label for="email">E-mail</label>
+                <input type="email" name="email"  id='email' autocomplete="off" required>
+                <br><br>
                 <label for="password">Пароль</label>
                 <input type="password" name="password" id='password' autocomplete="off" required>
                 <br><br>

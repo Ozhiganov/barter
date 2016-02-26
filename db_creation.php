@@ -5,9 +5,9 @@ $create_db = new mysqli("barter", "root", "");
          echo "Не удалось подключиться:".$create_db->connect_error;
     exit();
     }
-$create_db->query("CREATE DATABASE `main` CHARACTER SET utf8 COLLATE utf8_general_ci");
+$create_db->query("CREATE DATABASE `barter_main` CHARACTER SET utf8 COLLATE utf8_general_ci");
 $create_db->close();
-$create_table = new mysqli("barter","root","","main");
+$create_table = new mysqli("barter","root","","barter_main");
 if ($create_table->connect_errno) {
     echo "Не удалось подключиться:".$create_table->connect_error;
     exit();

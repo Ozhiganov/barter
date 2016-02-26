@@ -3,7 +3,7 @@
 if(isset($_POST['hidden_sign_in_form'])&& !empty($_POST['hidden_sign_in_form'])){
     if (isset($_POST["login"])!= 0 && isset($_POST["password"])!= 0){
 
-        $connect_main_db = mysqli_connect('barter', 'root', '', 'main');//Подключение к основной базе данных
+        $connect_main_db = mysqli_connect('barter', 'root', '', 'barter_main');//Подключение к основной базе данных
         if (!$connect_main_db){
             die('Ошибка подключения (' . mysqli_connect_errno() . ') '
                 . mysqli_connect_error());
