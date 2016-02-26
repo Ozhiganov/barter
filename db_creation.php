@@ -5,9 +5,9 @@ $create_db = new mysqli("barter", "root", "");
          echo "Не удалось подключиться:".$create_db->connect_error;
     exit();
     }
-$create_db->query("CREATE DATABASE `main` CHARACTER SET utf8 COLLATE utf8_general_ci");
+$create_db->query("CREATE DATABASE `barter_main` CHARACTER SET utf8 COLLATE utf8_general_ci");
 $create_db->close();
-$create_table = new mysqli("barter","root","","main");
+$create_table = new mysqli("barter","root","","barter_main");
 if ($create_table->connect_errno) {
     echo "Не удалось подключиться:".$create_table->connect_error;
     exit();
@@ -38,6 +38,19 @@ region INT(11),
 city INT(11),
 price INT(11)
 )");
+
+//Users tables
+$create_table -> query("CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `login` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `email` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login` (`login`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
+
 
 $handle = @fopen("regions.txt", "r");
 $buffer = fgets($handle, 4096);
