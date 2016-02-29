@@ -29,7 +29,7 @@
           exit();
       }
 
-      $query = "SELECT * FROM regions";
+      $query = "SELECT * FROM `regions` ORDER BY `name` ASC";
       $result = $region->query($query);
       $row = $result->fetch_all(MYSQL_ASSOC);
       foreach ($row as &$val)
