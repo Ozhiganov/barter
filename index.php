@@ -115,6 +115,7 @@
                 <br><br>
 
                 <input type="submit" name="submit_sign_up" value="Зарегистрироваться">
+                <span class='msg'><?php echo $message; ?></span>
             </form>
         </div>
     </div>

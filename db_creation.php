@@ -46,7 +46,10 @@ $create_table -> query("CREATE TABLE IF NOT EXISTS `users` (
   `login` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
+  `activation` varchar(128) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `activation` (`activation`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
