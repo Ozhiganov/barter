@@ -1,31 +1,31 @@
 <?php
 //You need to perform this only one time
 $create_db = new mysqli("barter", "root", "");
-    if ($create_db->connect_errno) {
-         echo "Не удалось подключиться:".$create_db->connect_error;
+if ($create_db->connect_errno) {
+    echo "Не удалось подключиться:".$create_db->connect_error;
     exit();
-    }
-$create_db->query("CREATE DATABASE `barter_main` CHARACTER SET utf8 COLLATE utf8_general_ci");
+}
+$create_db->query("CREATE DATABASE IF NOT EXISTS `barter_main` CHARACTER SET utf8 COLLATE utf8_general_ci");
 $create_db->close();
 $create_table = new mysqli("barter","root","","barter_main");
 if ($create_table->connect_errno) {
     echo "Не удалось подключиться:".$create_table->connect_error;
     exit();
 }
-$create_table->query("CREATE TABLE topics (
+$create_table->query("CREATE TABLE IF NOT EXISTS topics (
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 name TEXT NOT NULL
 )");
-$create_table->query("CREATE TABLE regions (
+$create_table->query("CREATE TABLE IF NOT EXISTS regions (
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 name TEXT NOT NULL
 )");
-$create_table->query("CREATE TABLE cities (
+$create_table->query("CREATE TABLE IF NOT EXISTS cities (
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 region_id INT(11),
 name TEXT NOT NULL
 )");
-$create_table->query("CREATE TABLE advertisements (
+$create_table->query("CREATE TABLE IF NOT EXISTS advertisements (
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 suggest_from INT(11),
 suggest_to INT(11),
@@ -54,20 +54,23 @@ $create_table -> query("CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
 
-
-$handle = @fopen("regions.txt", "r");
-$buffer = fgets($handle, 4096);
-$create_table->set_charset("utf8");
-if ($handle) {
-    while (($buffer = fgets($handle, 4096)) !== false) {
-        $region = $create_table->real_escape_string($buffer);
-        if($create_table->real_query("INSERT INTO regions (name) VALUES ('$region')"))
-            printf("%s\n","Success");
-        else
-            printf("%s\n","error");
+$region_check = $create_table->query("SELECT COUNT(*) FROM  `regions`");
+$res = $region_check->fetch_all(MYSQL_NUM);
+if($res[0][0] == 0) {
+    $handle = @fopen("regions.txt", "r");
+    $buffer = fgets($handle, 4096);
+    $create_table->set_charset("utf8");
+    if ($handle) {
+        while (($buffer = fgets($handle, 4096)) !== false) {
+            $region = $create_table->real_escape_string($buffer);
+            if ($create_table->real_query("INSERT INTO regions (name) VALUES ('$region')"))
+                printf("%s\n", "Success");
+            else
+                printf("%s\n", "error");
+        }
+        if (!feof($handle)) {
+            echo "Error: unexpected fgets() fail\n";
+        }
+        fclose($handle);
     }
-    if (!feof($handle)) {
-        echo "Error: unexpected fgets() fail\n";
-    }
-    fclose($handle);
 }
