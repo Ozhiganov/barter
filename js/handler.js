@@ -114,9 +114,14 @@ jQuery(function($){
                     "Name:"+current['name']+"<br></div>";
                 }
                 $("#search_area").html(search_result);
-
+                $("#close_find").css("display","block");
             }
         });
+    });
+    $('body').on('click', '#close_find', function() {
+        $("#suggest_area").css("display","block");
+        $("#search_area").empty();
+        $("#close_find").css("display","none");
     });
     $('body').on('click', '#advertisment-open', function(e){
         e.preventDefault();
