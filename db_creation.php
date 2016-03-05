@@ -27,6 +27,8 @@ name TEXT NOT NULL
 )");
 $create_table->query("CREATE TABLE IF NOT EXISTS advertisements (
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+user_id INT(11),
+publish_date INT(11),
 suggest_from INT(11),
 suggest_to INT(11),
 title TEXT NOT NULL,
@@ -42,11 +44,15 @@ price INT(11)
 //Users tables
 $create_table -> query("CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `registration_date` int(11),
   `name` varchar(32) NOT NULL,
   `login` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
+  `activation` varchar(128) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `activation` (`activation`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
@@ -71,3 +77,6 @@ if($res[0][0] == 0) {
         fclose($handle);
     }
 }
+
+mkdir("img");
+mkdir("tmp");

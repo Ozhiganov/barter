@@ -3,6 +3,7 @@
     <meta charset="utf-8" />
     <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="js/jquery.the-modal.js"></script>
+    <script type="text/javascript" src="js/jquery.damnUploader.js"></script>
     <script type="text/javascript" src="js/handler.js"></script>
     <link rel="stylesheet" type="text/css" href="css/the-modal.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
@@ -35,7 +36,7 @@
             <datalist id="city_find" autocomplete="off">
             </datalist>
             <br>
-            <input type="button" id="submit_find" value="search"/>
+            <input type="submit" value="search"/>
             <input type="button" id="close_find" value="close search" style="display: none"/>
         </form>
     </div>
@@ -71,7 +72,12 @@
             <input list="city_suggest" id="city_selected_suggest" required autocomplete="off">
             <datalist id="city_suggest" autocomplete="off">
             </datalist>
-            <input type="submit" id="submit_suggest"/>
+
+            <input type="file" id="file_input" name="my-file"/>
+            <input type="button" id="clear_btn" value="clear"/>
+            <br>
+            <div id="upload_pic"></div>
+            <input type="submit"/>
         </form>
     </div>
 </div>
@@ -115,9 +121,12 @@
             <input type="password" name="password_check" id="password_check" autocomplete="off" required>
             <br><br>
 
-            <input type="submit" name="submit_sign_up" value="Зарегистрироваться">
-        </form>
-    </div>
+                <input type="submit" name="submit_sign_up" value="Зарегистрироваться">
+                <span class='msg'><?php echo $message; ?></span>
+            </form>
+        </div>
+
+
 </div>
 <!-- <button id="advertisment-open">place an advertisement</button>
 
