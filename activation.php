@@ -21,6 +21,8 @@ if(!empty($_GET['code']) && isset($_GET['code']))
         if(mysqli_num_rows($count) == 1)
         {
             mysqli_query($connect_main_db,"UPDATE `users` SET status='1' WHERE `activation`='$code'");
+            $res = $count->fetch_all(MYSQL_ASSOC);
+            mkdir("img/".$res[0][id]);
             $msg="Ваш аккаунт активирован";
         }
         else

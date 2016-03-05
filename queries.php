@@ -2,13 +2,16 @@
     include "main.php";
     if($_POST['suggest'])
     {
-        //query string creation except city_id
+        //query string creation except city_id and publish_date
         $param = json_decode($_POST['suggest']);
         $fields = "";
         $values = "'";
         foreach ($suggest as &$val) {
             $fields = $fields.$val.",";
-            $values = $values.$param->$val."','";
+            if(strnatcasecmp($val, "media") == 0)
+                $values = $values.substr($param->$val,1)."','";
+            else
+                $values = $values.$param->$val."','";
         }
         unset($val);
         //connection to db
@@ -38,13 +41,15 @@
             $city_array = $city_query->fetch_all(MYSQL_ASSOC);
             $city_id = $city_array[0][id];
         }
-        $fields = $fields."city";
-        $values = $values.$city_id."'";
+        $fields = $fields."city,publish_date";
+        $values = $values.$city_id."','".time()."'";
         //query to db
 
-        $suggest_db->real_query("INSERT INTO advertisements ($fields) VALUES ($values)");
+        if($suggest_db->real_query("INSERT INTO advertisements ($fields) VALUES ($values)"))
+            echo json_encode(array("res" => "ok"));
+        else
+            echo json_encode(array("res" => substr("insert error",1)));
         $suggest_db->close();
-        echo json_encode($result);
         exit();
     }
     if($_POST['region'])
@@ -96,4 +101,66 @@
             $result = array("res" => "not empty");
         echo json_encode($result);*/
         exit();
+    }
+
+    if(!empty($_FILES) && !empty($_FILES['my-file'])) {
+        //path to load
+        $path = 'img/';
+        $tmp_path = 'tmp/';
+
+        function resize($file)
+        {
+           global $tmp_path;
+
+           $max_size = 600;
+           if ($file['type'] == 'image/jpeg') {
+               $source = imagecreatefromjpeg($file['tmp_name']);
+               $extension = ".jpeg";
+           }
+           elseif ($file['type'] == 'image/png') {
+               $source = imagecreatefrompng($file['tmp_name']);
+               $extension = ".png";
+           }
+           elseif ($file['type'] == 'image/gif') {
+               $source = imagecreatefromgif($file['tmp_name']);
+               $extension = ".gif";
+           }
+           else
+               return false;
+           $w_src = imagesx($source);
+           $h_src = imagesy($source);
+
+           if ($w_src > $max_size)
+           {
+               // proportions
+               $ratio = $w_src/$max_size;
+               $w_dest = round($w_src/$ratio);
+               $h_dest = round($h_src/$ratio);
+               // create empty image
+               $dest = imagecreatetruecolor($w_dest, $h_dest);
+
+               // copy to empty image
+               imagecopyresampled($dest, $source, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src);
+
+               imagejpeg($dest, $tmp_path.$file['name'], 75);
+               imagedestroy($dest);
+               imagedestroy($source);
+
+               return $extension;
+           }
+           else
+           {
+               imagejpeg($source, $tmp_path . $file['name'], 75);
+               imagedestroy($source);
+               return $extension;
+           }
+        }
+
+        $ext = resize( $_FILES['my-file']);
+        $new_path = $path.count(scandir($path)).$ext;
+        if (!@copy($tmp_path.$_FILES['my-file']['name'], $path.count(scandir($path)).$ext))
+           echo json_encode(array('status' => "error",));
+
+        echo json_encode(array('status' => $new_path));
+        unlink($tmp_path.$_FILES['my-file']['name']);
     }

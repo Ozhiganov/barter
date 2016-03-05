@@ -1,5 +1,5 @@
 <?php
-    $suggest = array("suggest_from","suggest_to","title", "description", "contacts", "name", "price","region");
+    $suggest = array("suggest_from","suggest_to","title", "description", "contacts", "name", "price","region","media");
     function barter_topics()
     {
         $topics = new mysqli("barter", "root", "", "barter_main");
