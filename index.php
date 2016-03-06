@@ -2,18 +2,17 @@
 <head>
     <meta charset="utf-8" />
     <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
-    <script type="text/javascript" src="js/jquery.the-modal.js"></script>
     <script type="text/javascript" src="js/jquery.damnUploader.js"></script>
     <script type="text/javascript" src="js/handler.js"></script>
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css" media="all">
-    <link rel="stylesheet" type="text/css" href="css/the-modal.css" media="all">
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/modal.css" media="all">
 </head>
 <body>
 <div id="header">
 
 </div>
 <hr>
+<div id="overlay"></div>
 <div class="body_container">
  <div class="main_case">
      <br>
@@ -24,7 +23,7 @@
                 <br>From
                 <select id="from_topics_of_barter_find">
                     <?php
-                    include("main.php");
+                    include_once("main.php");
                     barter_topics();
                     ?>
                 </select>
@@ -52,11 +51,12 @@
     </div>
     <div id="suggest_area">
         <button id="suggest_btn">Suggest an advertisment</button>
-        <div id="suggest_div" style="display: none">
+        <div id="suggest_div" class="modal_div">
+            <span class="modal_close">X</span>
             <form id="suggest_form">
                 <br>From
                 <select id="from_topics_of_barter_suggest">
-                    <?php barter_topics(); ?>
+                    <?php include_once("../main.php"); barter_topics(); ?>
                 </select>
                 <br>To
                 <select id="to_topics_of_barter_suggest">
@@ -68,8 +68,6 @@
                 <input type="text" id="description_suggest" autocomplete="off" required/>
                 <br>Contacts
                 <input type="text" id="contacts_suggest" autocomplete="off" required/>
-                <br>Name
-                <input type="text" id="name_suggest" autocomplete="off" required/>
                 <br>Price
                 <input type="number" id="price_suggest" autocomplete="off" required/>
                 <br>Region
@@ -93,8 +91,9 @@
     <div id="search_area"></div>
     <!--sign in && sign up-->
     <div>
-        <!--<button id="show_sign_in"></button>-->
-        <div id="hidden_sign_in_form" style="">
+        <button id="show_sign_in">Войти</button>
+        <div id="hidden_sign_in_form" class="modal_div" style="">
+            <span class="modal_close">X</span>
             <h2>Авторизация</h2>
             <form id="sign_in_form" method="post">
                 <label for="login">Логин</label>
@@ -111,10 +110,10 @@
     </div>
 
     <div>
-        <!--<button id="show_sign_up"></button>-->
-        <div id="hidden_sign_up_form" style="">
+        <button id="show_sign_up">Регистрация</button>
+        <div id="hidden_sign_up_form" class="modal_div" style="">
+            <span class="modal_close">X</span>
             <h2>Регистрация</h2>
-            <!--<form action="sign_up.php" method="post">-->
             <form id="sign_up_form">
                 <label for="username">Имя</label><br>
                 <input type="text" name="username" id="username" placeholder="как к вам обращаться? :)" autocomplete="off" required>
@@ -140,11 +139,4 @@
  </div>
 
 </div>
-
-<!-- <button id="advertisment-open">place an advertisement</button>
-
- <div class="modal" id="advertisment" style="display: none">
-     <a href="#" class="close">&times;</a>
-        test your luck and might
-    </div>-->
 </body>
