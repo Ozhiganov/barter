@@ -77,6 +77,25 @@ if($res[0][0] == 0) {
         fclose($handle);
     }
 }
-
+$topics_check = $create_table->query("SELECT COUNT(*) FROM  `topics`");
+$res = $topics_check->fetch_all(MYSQL_NUM);
+if($res[0][0] == 0) {
+    $handle = @fopen("topics.txt", "r");
+    $buffer = fgets($handle, 4096);
+    $create_table->set_charset("utf8");
+    if ($handle) {
+        while (($buffer = fgets($handle, 4096)) !== false) {
+            $topic = $create_table->real_escape_string($buffer);
+            if ($create_table->real_query("INSERT INTO `topics` (name) VALUES ('$topic')"))
+                printf("%s\n", "Success");
+            else
+                printf("%s\n", "error");
+        }
+        if (!feof($handle)) {
+            echo "Error: unexpected fgets() fail\n";
+        }
+        fclose($handle);
+    }
+}
 mkdir("img");
 mkdir("tmp");

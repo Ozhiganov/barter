@@ -41,8 +41,10 @@
             $city_array = $city_query->fetch_all(MYSQL_ASSOC);
             $city_id = $city_array[0][id];
         }
-        $fields = $fields."city,publish_date,user_id";
-        $values = $values.$city_id."','".time()."','".$_COOKIE['id']."'";
+        $name_req = $suggest_db->query("SELECT `name` FROM `users` WHERE `id` LIKE '".$_COOKIE['id']."' LIMIT 0,1");
+        $name = $name_req->fetch_all(MYSQL_ASSOC);
+        $fields = $fields."city,publish_date,user_id,name";
+        $values = $values.$city_id."','".time()."','".$_COOKIE['id']."','".$name[0][name]."'";
         //query to db
 
         if($suggest_db->real_query("INSERT INTO advertisements ($fields) VALUES ($values)"))

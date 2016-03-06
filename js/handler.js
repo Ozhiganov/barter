@@ -2,17 +2,17 @@
 jQuery(function($){
 
     function sign_in() {
-        $("#hidden_sign_in_form").css("display","none");
         $("#sign_out").css("display","block");
-        $("#hidden_sign_up_form").css("display","none");
+        $("#show_sign_up").css("display","none");
+        $("#show_sign_in").css("display","none");
     }
 
     function sign_out() {
-        $("#hidden_sign_in_form").css("display","block");
         $("#sign_out").css("display","none");
-        $("#hidden_sign_up_form").css("display","block");
-        $("#suggest_div").css("display","none");
+        $("#show_sign_up").css("display","block");
+        $("#show_sign_in").css("display","block");
     }
+
     var $fileInput = $('#file_input');
     var $uploadForm = $('#suggest_form');
     var $uploadRows = $('#upload_pic');
@@ -41,7 +41,7 @@ jQuery(function($){
                 $preview.attr('src', e.target.result);
             });
         }
-        $($preview).prependTo($uploadRows); // Preview
+        $($preview).prependTo($('#upload_pic')); // Preview
     };
 
     // File adding handler
@@ -99,7 +99,6 @@ jQuery(function($){
                 'title': $("#title_suggest").val(),
                 'description': $("#description_suggest").val(),
                 'contacts': $("#contacts_suggest").val(),
-                'name': $("#name_suggest").val(),
                 'price': $("#price_suggest").val(),
                 'region': $("#region_suggest option:selected").val(),
                 'city': $("#city_selected_suggest").val(),
@@ -113,6 +112,8 @@ jQuery(function($){
                 success: function(html) {
                     $("#suggest_form").trigger('reset');
                     $clearBtn.trigger('click');
+                    $(".modal_close").trigger('click');
+
                     alert(html['res']);
                     //TODO: callback
                 }
@@ -141,6 +142,12 @@ jQuery(function($){
 
             }
         });
+    });
+    $('body').on('click','.modal_close, #overlay', function() {
+        $('.modal_div').animate({opacity: 0, top: '45%'}, 200, function(){
+                $(this).css('display', 'none');
+                $('#overlay').fadeOut(400);
+            })
     });
     $('body').on('click', '#find_btn', function (e) {
         e.preventDefault();
@@ -204,7 +211,11 @@ jQuery(function($){
             success: function(html) {
                 if(html['res'] == 2) {
                     $("#find_form_div").css("display", "none");
-                    $("#suggest_div").css("display", "block").hide().fadeIn(500);
+                    $("#overlay").fadeIn(400, function(){
+                        $("#suggest_div")
+                            .css('display', 'block')
+                            .animate({opacity: 1, top: '50%'}, 200);
+                    });
                     $('#region_suggest').trigger('change');
                 }
                 else if(html['res'] == 1)
@@ -238,6 +249,8 @@ jQuery(function($){
             data: "submit_sign_up="+JSON.stringify(sign_up_data),
             success: function(sup) {
                 alert(sup['res']);
+                $("#sign_up_form").trigger('reset');
+                $(".modal_close").trigger('click');
                 //TODO: callback
             }
         });
@@ -255,6 +268,7 @@ jQuery(function($){
             dataType: 'json',
             data: "submit_sign_in="+JSON.stringify(sign_in_data),
             success: function(sup) {
+                $(".modal_close").trigger('click');
                 if(sup['res'] == 1){
                     sign_in();
                 }
@@ -328,14 +342,18 @@ jQuery(function($){
         $("#search_area").empty();
         $("#close_find").css("display","none");
     });
-    $('body').on('click', '#advertisment-open', function(e){
-        e.preventDefault();
-        $('#advertisment').modal().open();
+    $('body').on('click', '#show_sign_in', function() {
+        $("#overlay").fadeIn(400, function(){
+            $("#hidden_sign_in_form")
+                .css('display', 'block')
+                .animate({opacity: 1, top: '50%'}, 200);
+        });
     });
-
-    // attach modal close handler
-    $('.modal .close').on('click', function(e){
-        e.preventDefault();
-        $.modal().close();
+    $('body').on('click', '#show_sign_up', function(){
+        $("#overlay").fadeIn(400, function(){
+            $("#hidden_sign_up_form")
+                .css('display', 'block')
+                .animate({opacity: 1, top: '50%'}, 200);
+        });
     });
 });
