@@ -1,6 +1,18 @@
 
 jQuery(function($){
 
+    function sign_in() {
+        $("#hidden_sign_in_form").css("display","none");
+        $("#sign_out").css("display","block");
+        $("#hidden_sign_up_form").css("display","none");
+    }
+
+    function sign_out() {
+        $("#hidden_sign_in_form").css("display","block");
+        $("#sign_out").css("display","none");
+        $("#hidden_sign_up_form").css("display","block");
+        $("#suggest_div").css("display","none");
+    }
     var $fileInput = $('#file_input');
     var $uploadForm = $('#suggest_form');
     var $uploadRows = $('#upload_pic');
@@ -99,6 +111,8 @@ jQuery(function($){
                 dataType: 'json',
                 data: "suggest="+JSON.stringify(data),
                 success: function(html) {
+                    $("#suggest_form").trigger('reset');
+                    $clearBtn.trigger('click');
                     alert(html['res']);
                     //TODO: callback
                 }
@@ -112,12 +126,26 @@ jQuery(function($){
         $fileInput.duCancelAll();
         $uploadRows.empty();
     });
+    $(document).ready(function(){
+        $.ajax({
+            type: 'POST',
+            url: 'identification.php',
+            dataType: 'json',
+            data: "check_status= ",
+            success: function(html) {
+                if(html['res'] == 1 || html['res'] == 2) {
+                    sign_in();
+                }
+                else
+                    sign_out();
 
+            }
+        });
+    });
     $('body').on('click', '#find_btn', function (e) {
         e.preventDefault();
         $("#find_form_div").css("display", "block").hide().fadeIn(500);
         $("#suggest_div").css("display", "none");
-        $('#region_suggest').trigger('change');
         $('#region_find').trigger('change');
     });
     $('body').on('change','#region_suggest',function(e){
@@ -168,10 +196,25 @@ jQuery(function($){
     });
     $('body').on('click', '#suggest_btn', function (e) {
         e.preventDefault();
-        $("#find_form_div").css("display", "none");
-        $("#suggest_div").css("display", "block").hide().fadeIn(500);
-        $('#region_suggest').trigger('change');
-        $('#region_find').trigger('change');
+        $.ajax({
+            type: 'POST',
+            url: 'identification.php',
+            dataType: 'json',
+            data: "check_status= ",
+            success: function(html) {
+                if(html['res'] == 2) {
+                    $("#find_form_div").css("display", "none");
+                    $("#suggest_div").css("display", "block").hide().fadeIn(500);
+                    $('#region_suggest').trigger('change');
+                }
+                else if(html['res'] == 1)
+                    alert("Вы должны активировать свой аккаунт");
+                else
+                    alert("Вы должны зарегистрироваться, чтобы размещать объявления");
+
+            }
+        });
+
     })
     $('body').on('submit', '#suggest_form', function (e) {
         e.preventDefault();
@@ -190,7 +233,7 @@ jQuery(function($){
         };
         $.ajax({
             type: 'POST',
-            url: 'sign_up.php',
+            url: 'identification.php',
             dataType: 'json',
             data: "submit_sign_up="+JSON.stringify(sign_up_data),
             success: function(sup) {
@@ -199,7 +242,42 @@ jQuery(function($){
             }
         });
     });
+    $('body').on('submit','#sign_in_form', function(e){
+        e.preventDefault();
+        var sign_in_data ={
+            'login': $("#login").val(),
+            'password': $("#password").val()
+        }
 
+        $.ajax({
+            type: 'POST',
+            url: 'identification.php',
+            dataType: 'json',
+            data: "submit_sign_in="+JSON.stringify(sign_in_data),
+            success: function(sup) {
+                if(sup['res'] == 1){
+                    sign_in();
+                }
+                //TODO: callback
+            }
+        });
+    });
+    $('body').on('click',"#sign_out", function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'identification.php',
+            dataType: 'json',
+            data: "sign_out= ",
+            success: function(sup) {
+                if(sup['res'] == 1){
+                   sign_out();
+                }
+                //TODO: callback
+            }
+        });
+
+    });
     $('body').on('submit','#find_form', function (e) {
         e.preventDefault();
         var data_request = {
@@ -221,7 +299,6 @@ jQuery(function($){
             dataType: 'json',
             data: "find="+JSON.stringify(data_request),
             success: function(html) {
-                alert("lsalfa");
                 $("#suggest_area").css("display","none");
                 var search_result = "";
                 for (var i in html) {
@@ -233,7 +310,12 @@ jQuery(function($){
                     "Region:"+search_data['region']+"<br>" +
                     "Description:"+current['description']+"<br>" +
                     "Contacts:"+current['contacts']+"<br>" +
-                    "Name:"+current['name']+"<br></div>";
+                    "Name:"+current['name']+"<br>";
+                    var media = current['media'].split(',');
+                    for (var j in media){
+                        search_result += "<img src='"+media[j]+"'/>"
+                    }
+                    search_result += "</div>"
                 }
                 $("#search_area").html(search_result);
                 $("#close_find").css("display","block");
