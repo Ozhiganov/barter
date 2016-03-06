@@ -1,5 +1,6 @@
 <?php
     $suggest = array("suggest_from","suggest_to","title", "description", "contacts", "name", "price","region","media");
+
     function barter_topics()
     {
         $topics = new mysqli("barter", "root", "", "barter_main");
@@ -17,7 +18,7 @@
             echo("<option value=".$value[id].">".$value[name]."</option>");
         unset($value);
         $topics->close();
-  }
+    }
 
   function region_selection()
   {
@@ -37,5 +38,3 @@
       unset($val);
       $region->close();
   }
-
-?>

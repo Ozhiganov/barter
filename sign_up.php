@@ -1,6 +1,12 @@
 <?php
+/*
+if (isset($_POST['submit_sign_up']) && !empty($_POST['submit_sign_up'])){*/
+echo json_encode(array("res" => "Ты лох :)"));
+if ($_POST['submit_sign_up']){
+    echo json_encode(array("res" => "Ты лах :)"));
+    $sign_up_fields = json_decode($_POST['submit_sign_up']);
 
-if (isset($_POST['submit_sign_up']) && !empty($_POST['submit_sign_up'])){
+
     if (isset($_POST["login"])!= 0 && isset($_POST["password"])!= 0 && isset($_POST["password_check"])!=0 && isset($_POST["username"])){
 
         $connect_main_db = mysqli_connect('barter', 'root', '', 'barter_main');
@@ -27,8 +33,8 @@ if (isset($_POST['submit_sign_up']) && !empty($_POST['submit_sign_up'])){
                             $body='';
 
                             mail($to, $subject,"Здравствуйте.\nДля окончания регистрации на сайте bartbord.ru перейдите по ссылке\nhttp:/barter/activation/".$activation."\nЕсли вы не регистрировались на этом сайте, проигнорируйте это письмо.");
-                            echo("<html><script>window.location = 'index.php'</script></html>");
-                            $message = "Проверьте почту :)";
+                            echo json_encode(array("res" => "Проверьте почту :)"));
+                            exit();
                         } else echo("something wrong");
 
                     } else echo("Регистрация неуспешна:пароли не совпадают");
