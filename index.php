@@ -119,13 +119,13 @@
                 <input type="text" name="username" id="username" placeholder="как к вам обращаться? :)" required>
                 <br><br>
                 <label for="login">Логин</label><br>
-                <input type="text" name="login"  id='login' autocomplete="off" required>
+                <input type="text" name="login"  id='reg_login' autocomplete="off" required>
                 <br><br>
                 <label for="email">Ваш email | электронная почта</label><br>
                 <input type="email" name="email"  id='email' autocomplete="off" placeholder="" required>
                 <br><br>
                 <label for="password">Пароль</label><br>
-                <input type="password" name="password" id='password' autocomplete="off" required>
+                <input type="password" name="password" id='reg_password' autocomplete="off" required>
                 <br><br>
                 <label for="password_check">И ещё раз пароль</label><br>
                 <input type="password" name="password_check" id="password_check" autocomplete="off" required>
