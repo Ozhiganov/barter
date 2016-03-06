@@ -96,7 +96,7 @@
         <!--<button id="show_sign_in"></button>-->
         <div id="hidden_sign_in_form" style="">
             <h2>Авторизация</h2>
-            <form action="sign_in.php" method="post">
+            <form id="sign_in_form" method="post">
                 <label for="login">Логин</label>
                 <input type="text" name="login"  id='login' autocomplete="off" required>
                 <br><br>
@@ -107,6 +107,7 @@
                 <input type="submit" name="hidden_sign_in_form" value="Авторизоваться">
             </form>
         </div>
+        <button id="sign_out" style="display: none">Выйти</button>
     </div>
 
     <div>
@@ -116,7 +117,7 @@
             <!--<form action="sign_up.php" method="post">-->
             <form id="sign_up_form">
                 <label for="username">Имя</label><br>
-                <input type="text" name="username" id="username" placeholder="как к вам обращаться? :)" required>
+                <input type="text" name="username" id="username" placeholder="как к вам обращаться? :)" autocomplete="off" required>
                 <br><br>
                 <label for="login">Логин</label><br>
                 <input type="text" name="login"  id='reg_login' autocomplete="off" required>

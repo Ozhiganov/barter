@@ -41,8 +41,8 @@
             $city_array = $city_query->fetch_all(MYSQL_ASSOC);
             $city_id = $city_array[0][id];
         }
-        $fields = $fields."city,publish_date";
-        $values = $values.$city_id."','".time()."'";
+        $fields = $fields."city,publish_date,user_id";
+        $values = $values.$city_id."','".time()."','".$_COOKIE['id']."'";
         //query to db
 
         if($suggest_db->real_query("INSERT INTO advertisements ($fields) VALUES ($values)"))
@@ -77,7 +77,7 @@
         if ($find_db->connect_errno) {
             exit();
         }
-        $find_query = "SELECT title, description, contacts, name  FROM advertisements WHERE suggest_from='$find_fields->find_from' AND suggest_to='$find_fields->find_to'";
+        $find_query = "SELECT media,title, description, contacts,publish_date,name,city,region  FROM advertisements WHERE suggest_from='$find_fields->find_from' AND suggest_to='$find_fields->find_to'";
         if(strnatcasecmp("", $find_fields->keywords) != 0)
             $find_query .= " AND LOWER(title) LIKE '%".strtolower($find_fields->keywords)."%'";
         if($find_fields->region != 0)
@@ -92,7 +92,7 @@
         $find_result_array = $find_result->fetch_all(MYSQL_ASSOC);
         $json_result = array();
         foreach ($find_result_array as $val)
-            array_push($json_result,array("title" => $val[title],"description" => $val[description],"contacts" => $val[contacts],"name" => $val[name]));
+            array_push($json_result,array("title" => $val[title],"description" => $val[description],"contacts" => $val[contacts],"name" => $val[name], "media" => $val[media]));
         echo json_encode($json_result);
 
         /*if(strnatcasecmp("", $find_fields->keywords) == 0)
@@ -105,7 +105,7 @@
 
     if(!empty($_FILES) && !empty($_FILES['my-file'])) {
         //path to load
-        $path = 'img/';
+        $path = 'img/'.$_COOKIE['id'].'/';
         $tmp_path = 'tmp/';
 
         function resize($file)
