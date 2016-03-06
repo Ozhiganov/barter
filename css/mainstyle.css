@@ -1,0 +1,58 @@
+/* -----------------
++
++ BASIC STYLES
++
+-------------------- */
+
+body{
+    background: #ffffff;
+    margin: 0;
+}
+h2,h3 {
+
+    font-family: Arial, Tahoma, sans-serif;
+}
+
+h2{
+    color: #424e5c;
+    font-size: xx-large;
+    line-height: 1.2;
+
+}
+h3{
+
+}
+hr{
+    background: #fff;
+    border: none;
+    height: 2px;
+    margin: 0;
+}
+/*+ - - - - - - - - - - - - - - - - +*/
+
+
+
+/* -----------------
++
++ NEW STYLES
++
+-------------------- */
+/* Nav - header */
+#header{
+    background: url('../img/system/navbar_noise.png') #d24102;
+    width: 100%;
+    height: 77px;
+}
+/*   ^_^    */
+
+/* body_container  */
+.body_container{
+    background: url('../img/system/body_container_background.png') repeat-x;
+    width:100%;
+}
+.main_case{
+    margin: auto;
+    width:70%;
+    padding-bottom:30px;
+}
+/*   ^_^    */

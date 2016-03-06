@@ -179,6 +179,27 @@ jQuery(function($){
             $fileInput.duStart();
         }
     });
+    $('body').on('submit','#sign_up_form', function (e){
+        e.preventDefault();
+        var sign_up_data = {
+            'username':$("#username ").val(),
+            'login':$("#reg_login ").val(),
+            'email':$("#email ").val(),
+            'password':$("#reg_password ").val(),
+            'password_check':$("#password_check ").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'sign_up.php',
+            dataType: 'json',
+            data: "submit_sign_up="+JSON.stringify(sign_up_data),
+            success: function(sup) {
+                alert(sup['res']);
+                //TODO: callback
+            }
+        });
+    });
+
     $('body').on('submit','#find_form', function (e) {
         e.preventDefault();
         var data_request = {

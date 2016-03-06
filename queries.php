@@ -3,12 +3,12 @@
     if($_POST['suggest'])
     {
         //query string creation except city_id and publish_date
-        $param = json_decode($_POST['suggest']);
+        $param = json_decode($_POST['suggest']);//Преобразования json в массив
         $fields = "";
         $values = "'";
         foreach ($suggest as &$val) {
             $fields = $fields.$val.",";
-            if(strnatcasecmp($val, "media") == 0)
+            if(strnatcasecmp($val, "media") == 0) //CRUTCH
                 $values = $values.substr($param->$val,1)."','";
             else
                 $values = $values.$param->$val."','";
