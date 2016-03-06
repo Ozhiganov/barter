@@ -11,7 +11,19 @@
 </head>
 <body>
 <div id="header">
+    <div class="header_case">
+        <div id="center">
 
+            <div id="logotype">
+
+            </div>
+            <div id="tools">
+                <!--<a>Регистрация</a> |
+                <a>Вход</a>-->
+            </div>
+
+        </div>
+    </div>
 </div>
 <hr>
 <div class="body_container">
