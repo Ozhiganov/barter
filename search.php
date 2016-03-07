@@ -28,33 +28,55 @@
 <hr>
 <div id="overlay"></div>
 <div class="body_container">
-    <form id="find_form" method="GET" action="search.php">
-        <br>From
-        <select id="from_topics_of_barter_find" name="from">
-            <?php
-            include_once("main.php");
-            barter_topics();
-            ?>
-        </select>
-        <br>To
-        <select id="to_topics_of_barter_find" name="to">
-            <?php barter_topics(); ?>
-        </select>
+    <form id="find_form"  method="GET" action="search.php">
+        <br><br>
+        <table id="find_table">
+            <tr>
+                <th style="width:30%"></th>
+                <th  style="width:5%"></th>
+                <th  style="width:30%"></th>
+            </tr>
+            <tr>
+                <td>
+                    <label>Меняю</label>
+                    <select id="from_topics_of_barter_find" name="from">
+                        <?php include_once("main.php");
+                        barter_topics(); ?>
+                    </select>
+                </td>
+                <td></td>
+                <td>
+                    <label for="to_topics_of_barter_find">На</label>
+                    <select id="to_topics_of_barter_find" name="to">
+                        <?php barter_topics(); ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <label for="description_find">Ключевые слова</label>
+                    <input name="keywords" type="text" id="description_find" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Регион обмена</label>
+                    <select id="region_find" name="region">
+                        <option value="0">Вся Россия</option>
+                        <?php region_selection() ?>
+                    </select>
+                </td>
+                <td></td>
+                <td>
+                    <label>Город</label>
+                    <input name="city" list="city_find" id="city_selected_find" autocomplete="off">
+                    <datalist id="city_find">
+                    </datalist>
+                </td>
+            </tr>
+        </table>
         <br>
-        <label>Keywords</label>
-        <input type="text" name="keywords" id="description_find" autocomplete="off"/>
-        <br>
-        <label>Region</label>
-        <select id="region_find" name="region">
-            <option value="0">Вся Россия</option>
-            <?php region_selection() ?>
-        </select>
-        <br>
-        <label>City</label>
-        <input list="city_find" id="city_selected_find" name="city" autocomplete="off">
-        <datalist id="city_find">
-        </datalist>
-        <br>
+        <br><br>
         <div class="button_box">
             <input type="submit" class="functional_button" value="Искать"/>
         </div>
@@ -66,6 +88,12 @@
         exit();
     }
     $find_query = "SELECT `id`,`media`,`title`,`publish_date`,`city`,`region`  FROM `advertisements` WHERE `suggest_from`='$_GET[from]' AND `suggest_to`='$_GET[to]'";
+
+    $from_topic_req = $find_db->query("SELECT `name` FROM `topics` WHERE `id`='$_GET[from]' LIMIT  0,1");
+    $from_topic = $from_topic_req->fetch_all(MYSQLI_ASSOC);
+    $to_topic_req = $find_db->query("SELECT `name` FROM `topics` WHERE `id`='$_GET[to]' LIMIT  0,1");
+    $to_topic = $to_topic_req->fetch_all(MYSQLI_ASSOC);
+
     echo "<script>
                 $('#from_topics_of_barter_find').val('$_GET[from]');
                 $('#to_topics_of_barter_find').val('$_GET[to]');
@@ -115,8 +143,8 @@
             $current_city = $city_name;
         echo "<div>
                 <a href=advertisement_page.php?id=" . $val[id] . "><h3>" . $val[title] . "</h3></a>
-                <p>From:<br>
-                To:<br>
+                <p>From: " . $from_topic[0][name] . "<br>
+                To: " . $to_topic[0][name] . "<br>
                 Region: " . $current_region . "<br>
                 City: " . $current_city . "<br>
                 Date: " . strftime("%d.%m.%Y %H:%M", $val[publish_date]) . "<br></p>
