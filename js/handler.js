@@ -1,4 +1,3 @@
-
 jQuery(function($){
 
     function sign_in() {
@@ -105,6 +104,7 @@ jQuery(function($){
                 'city': $("#city_selected_suggest").val(),
                 'media': media
             };
+            alert(data.description);
             $.ajax({
                 type: 'POST',
                 url: 'queries.php',
@@ -168,7 +168,7 @@ jQuery(function($){
             success: function(html) {
                 var html_string = "";
                 for (var i in html) {
-                    html_string+="<option value="+html[i]+"></option>";
+                    html_string+="<option  value=" + html[i] + "></option>";
                 }
                 $("#city_suggest").html(html_string);
             }
@@ -295,18 +295,18 @@ jQuery(function($){
     });
     $('body').on('submit','#find_form', function (e) {
         e.preventDefault();
+        $("#close_find").trigger("click");
         var data_request = {
             'find_from': $("#from_topics_of_barter_find option:selected").val(),
             'find_to': $("#to_topics_of_barter_find option:selected").val(),
             'keywords': $("#description_find").val(),
-            'region': $("#region_find option:selected").val(),
+            'region_id': $("#region_find option:selected").val(),
+            'region_name': $("#region_find option:selected").text(),
             'city': $("#city_selected_find").val()
         };
         var search_data = {
             'find_from': $("#from_topics_of_barter_find option:selected").text(),
             'find_to': $("#to_topics_of_barter_find option:selected").text(),
-            'region': $("#region_find option:selected").text(),
-            'city': $("#city_selected_find").val()
         };
         $.ajax({
             type: 'POST',
@@ -319,20 +319,15 @@ jQuery(function($){
                 for (var i in html) {
                     var current = html[i];
                     search_result += "<div>" +
-                        "<h3>"+current['title'] + "</h3>" + "<p>" +
+                        "<a href=advertisement_page.php?id=" + current['id'] + "><h3>"+current['title'] + "</h3></a>" + "<p>" +
                         "From:"+search_data['find_from']+"<br>" +
                         "To:"+search_data['find_to']+"<br>" +
-                        "Region:"+search_data['region']+"<br>" +
-                        "Description:"+current['description']+"<br>" +
-                        "Contacts:"+current['contacts']+"<br>" +
-                        "Name:"+current['name']+"<br>"+ "</p>" +
-                            /* search_result += current['name']+" из " */
+                        "Region:"+current['region']+"<br>" +
+                        "City:"+current['city']+"<br>"+
+                        "Data:"+current['date']+"<br></p>" +
                         "<div class='pictures_box'>";
-                    var media = current['media'].split(',');
-                    for (var j in media){
-                        search_result += "<img src='"+media[j]+"'/>"
-                    }
-                    search_result += "</div></div><hr>"
+                        var media = current['media'].split(',');
+                        search_result += "<img src='"+media[0]+"'/></div></div><hr>";
                 }
                 $("#search_area").append(search_result);
                 $("#close_find").css("display","inline-block");

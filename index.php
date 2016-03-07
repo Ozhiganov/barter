@@ -69,7 +69,7 @@
                 <br>
                 <label>City</label>
                 <input list="city_find" id="city_selected_find" autocomplete="off">
-                <datalist id="city_find" autocomplete="off">
+                <datalist id="city_find">
                 </datalist>
                 <br>
                 <div class="button_box">
@@ -117,7 +117,7 @@
                         <td colspan="2" rowspan="3">
                             <label>Описание</label><br>
                            <!-- <input type="text" id="description_suggest" autocomplete="off" required/>-->
-                            <textarea></textarea>
+                            <textarea id="description_suggest"></textarea>
                         </td>
                         <!--<td></td>-->
                     </tr>
