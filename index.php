@@ -61,8 +61,12 @@
                 </select>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <br>
                 <label>На</label>
+=======
+                <br>To
+>>>>>>> parent of 2efca7f... Stylez+
 =======
                 <br>To
 >>>>>>> parent of 2efca7f... Stylez+
@@ -93,7 +97,11 @@
                 <br>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <label>Город</label>
+=======
+                <label>City</label>
+>>>>>>> parent of 2efca7f... Stylez+
 =======
                 <label>City</label>
 >>>>>>> parent of 2efca7f... Stylez+
