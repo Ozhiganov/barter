@@ -215,7 +215,7 @@ jQuery(function($){
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '10%'}, 200);
+                            .animate({opacity: 1, top: '6%'}, 200);
                     });
                     $('#region_suggest').trigger('change');
                 }
@@ -319,7 +319,7 @@ jQuery(function($){
                 for (var i in html) {
                     var current = html[i];
                     search_result += "<div>" +
-                        "<a href=advertisement_page.php?id=" + current['id'] + "><h3>"+current['title'] + "</h3></a>" + "<p>" +
+                        "<a href=advertisement_page/" + current['id'] + "><h3>"+current['title'] + "</h3></a>" + "<p>" +
                         "From:"+search_data['find_from']+"<br>" +
                         "To:"+search_data['find_to']+"<br>" +
                         "Region:"+current['region']+"<br>" +
