@@ -45,36 +45,35 @@
      <div id="find_area">
       <!--  <button class='agree_button' id="find_btn">Поиск по объявлениям</button>-->
         <div id="find_form_div" style="display: none">
-            <form id="find_form">
+            <form id="find_form" method="GET" action="search.php">
                 <br>From
-                <select id="from_topics_of_barter_find">
+                <select id="from_topics_of_barter_find" name="from">
                     <?php
                     include_once("main.php");
                     barter_topics();
                     ?>
                 </select>
                 <br>To
-                <select id="to_topics_of_barter_find">
+                <select id="to_topics_of_barter_find" name="to">
                     <?php barter_topics(); ?>
                 </select>
                 <br>
                 <label>Keywords</label>
-                <input type="text" id="description_find" autocomplete="off"/>
+                <input type="text" name="keywords" id="description_find" autocomplete="off"/>
                 <br>
                 <label>Region</label>
-                <select id="region_find">
+                <select id="region_find" name="region">
                     <option value="0">Вся Россия</option>
                     <?php region_selection() ?>
                 </select>
                 <br>
                 <label>City</label>
-                <input list="city_find" id="city_selected_find" autocomplete="off">
+                <input list="city_find" id="city_selected_find" name="city" autocomplete="off">
                 <datalist id="city_find">
                 </datalist>
                 <br>
                 <div class="button_box">
                     <input type="submit" class="functional_button" value="Искать"/>
-                    <input type="button" class="functional_button" id="close_find" value="Прекратить поиск" style="display: none"/>
                  </div>
             </form>
         </div>
@@ -166,7 +165,6 @@
             </form>
         </div>
     </div>
-    <div id="search_area"></div>
 
 
        <!--ФОРМА АВТОРИЗАЦИИ В ОКНЕ-->
