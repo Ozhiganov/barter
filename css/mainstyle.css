@@ -36,6 +36,7 @@ input{
     height: 17px;
     border:none;
     padding: 5px;
+    border-radius: 2px;
 }
 
 select{
@@ -240,21 +241,73 @@ p{
 #search_area p{
     margin-left: 10px;
 }
+
+
+
+
+#find_form{
+
+}
+#find_form label{
+    color: #677397;
+    font-size: 18px;
+}
 /*   ^_^    */
 
 
 /* Таблицы завезли и разгрузили  */
 #suggest_table{
     width:100%;
+    border-spacing: 0 10px;
+
    /* border: 1px #aaa solid;
     border-spacing: 26px 4px;*/
 }
-#suggest_table input{
-    width: 96%;
+#suggest_table input, textarea, select{
+    margin:0;
+    padding:0;
+    border:0;
+    border-radius: 2px;
 }
+
+#suggest_table input{
+    width: 100%;
+    padding:5px 0 5px 0;
+}
+
 #suggest_table textarea{
-    width:99%;
+    width:100%;
     height: 132px;
     resize: none;
+}
+
+
+#suggest_table tr{
+    margin-top:6px;
+}
+#suggest_table tr:first-child{
+    margin-top:0;
+}
+
+
+
+#find_table{
+    width:60%;
+    border-spacing: 0 14px;
+}
+
+#find_table select{
+    height:30px;
+}
+
+#find_table input{
+    padding:5px 0 5px 0;
+    height:30px;
+}
+
+#find_table input, select{
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 2px solid rgba(84, 96, 121, 0.5);
 }
 /*   ^_^    */
