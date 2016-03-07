@@ -2,17 +2,18 @@
 jQuery(function($){
 
     function sign_in() {
-        $("#sign_out").css("display","block");
+        $("#sign_out").css("display","inline_block");
         $("#show_sign_up").css("display","none");
         $("#show_sign_in").css("display","none");
     }
 
     function sign_out() {
         $("#sign_out").css("display","none");
-        $("#show_sign_up").css("display","block");
-        $("#show_sign_in").css("display","block");
+        $("#show_sign_up").css("display","inline_block");
+        $("#show_sign_in").css("display","inline_block");
     }
 
+    //FOR damnUploader
     var $fileInput = $('#file_input');
     var $uploadForm = $('#suggest_form');
     var $uploadRows = $('#upload_pic');
@@ -36,7 +37,7 @@ jQuery(function($){
     var createRowFromUploadItem = function(ui) {
         var $preview;
         if (isImgFile(ui.file)) {
-            $preview = $('<img/>').attr('width', 120);
+            $preview = $('<img/>').attr('height', 120);
             ui.readAs('DataURL', function(e) {
                 $preview.attr('src', e.target.result);
             });
@@ -144,7 +145,7 @@ jQuery(function($){
         });
     });
     $('body').on('click','.modal_close, #overlay', function() {
-        $('.modal_div').animate({opacity: 0, top: '45%'}, 200, function(){
+        $('.modal_div').animate({opacity: 0}, 200, function(){
                 $(this).css('display', 'none');
                 $('#overlay').fadeOut(400);
             })
@@ -214,7 +215,7 @@ jQuery(function($){
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '50%'}, 200);
+                            .animate({opacity: 1, top: '10%'}, 200);
                     });
                     $('#region_suggest').trigger('change');
                 }
@@ -270,6 +271,7 @@ jQuery(function($){
             success: function(sup) {
                 $(".modal_close").trigger('click');
                 if(sup['res'] == 1){
+
                     sign_in();
                 }
                 //TODO: callback
@@ -318,21 +320,23 @@ jQuery(function($){
                 for (var i in html) {
                     var current = html[i];
                     search_result += "<div>" +
-                    "<div align='center'>" + current['title'] + "</div>" +
+                     "<h3>"+current['title'] + "</h3>" + "<p>" +
                     "From:"+search_data['find_from']+"<br>" +
                     "To:"+search_data['find_to']+"<br>" +
                     "Region:"+search_data['region']+"<br>" +
                     "Description:"+current['description']+"<br>" +
                     "Contacts:"+current['contacts']+"<br>" +
-                    "Name:"+current['name']+"<br>";
+                    "Name:"+current['name']+"<br>"+ "</p>" +
+                   /* search_result += current['name']+" из " */
+                    "<div class='pictures_box'>";
                     var media = current['media'].split(',');
                     for (var j in media){
                         search_result += "<img src='"+media[j]+"'/>"
                     }
-                    search_result += "</div>"
+                    search_result += "</div></div><hr>"
                 }
                 $("#search_area").html(search_result);
-                $("#close_find").css("display","block");
+                $("#close_find").css("display","inline-block");
             }
         });
     });
@@ -343,17 +347,17 @@ jQuery(function($){
         $("#close_find").css("display","none");
     });
     $('body').on('click', '#show_sign_in', function() {
-        $("#overlay").fadeIn(400, function(){
+        $("#overlay").fadeIn(320, function(){
             $("#hidden_sign_in_form")
                 .css('display', 'block')
-                .animate({opacity: 1, top: '50%'}, 200);
+                .animate({opacity: 1}, 160);
         });
     });
     $('body').on('click', '#show_sign_up', function(){
-        $("#overlay").fadeIn(400, function(){
+        $("#overlay").fadeIn(320, function(){
             $("#hidden_sign_up_form")
                 .css('display', 'block')
-                .animate({opacity: 1, top: '50%'}, 200);
+                .animate({opacity: 1}, 160);
         });
     });
 });

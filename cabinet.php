@@ -20,17 +20,37 @@ if($_GET['act']) {
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Ваш кабинет</title>
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/handler.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/mainstyle.css" media="all">
 </head>
 <body>
-<div align="center">
+<div id="header">
+    <div class="header_case">
+        <div id="center">
 
-    <h2>Личный кабинет</h2>
+            <div id="logotype">
+
+            </div>
+
+            <div id="tools">
+                <a id="show_sign_up">Зарегистрироваться</a> |
+                <a id="show_sign_in">Войти</a>
+                <a id="sign_out">Выйти</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr>
+
+    <h2>Ваш кабинет</h2>
     <br>
     <a href="?act=logout">
         <button>Выйти</button>
     </a>
 
-</div>
+
 </body>
 </html>
