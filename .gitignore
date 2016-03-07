@@ -48,3 +48,8 @@ Temporary Items
 .idea/workspace.xml
 *.jpeg
 *.xml
+.idea/dataSources.xml
+*.xml
+*.png
+.idea/workspace.xml
+.idea/workspace.xml

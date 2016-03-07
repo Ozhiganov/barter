@@ -44,7 +44,7 @@ price INT(11)
 //Users tables
 $create_table -> query("CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `registration_date` int(11),
+  `registration_date` INT(11),
   `name` varchar(32) NOT NULL,
   `login` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,

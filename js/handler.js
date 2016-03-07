@@ -1,16 +1,15 @@
-
 jQuery(function($){
 
     function sign_in() {
-        $("#sign_out").css("display","inline_block");
+        $("#sign_out").css("display","inline-block");
         $("#show_sign_up").css("display","none");
         $("#show_sign_in").css("display","none");
     }
 
     function sign_out() {
         $("#sign_out").css("display","none");
-        $("#show_sign_up").css("display","inline_block");
-        $("#show_sign_in").css("display","inline_block");
+        $("#show_sign_up").css("display","inline-block");
+        $("#show_sign_in").css("display","inline-block");
     }
 
     //FOR damnUploader
@@ -72,7 +71,7 @@ jQuery(function($){
         // Show info and response when upload completed
         createRowFromUploadItem(ui);
         ui.completeCallback = function(success, data, errorCode) {
-                media += "," + data['status'];
+            media += "," + data['status'];
         };
 
         // Updating progress bar value in progress callback
@@ -105,6 +104,7 @@ jQuery(function($){
                 'city': $("#city_selected_suggest").val(),
                 'media': media
             };
+            alert(data.description);
             $.ajax({
                 type: 'POST',
                 url: 'queries.php',
@@ -140,15 +140,14 @@ jQuery(function($){
                 }
                 else
                     sign_out();
-
             }
         });
     });
     $('body').on('click','.modal_close, #overlay', function() {
         $('.modal_div').animate({opacity: 0}, 200, function(){
-                $(this).css('display', 'none');
-                $('#overlay').fadeOut(400);
-            })
+            $(this).css('display', 'none');
+            $('#overlay').fadeOut(400);
+        })
     });
     $('body').on('click', '#find_btn', function (e) {
         e.preventDefault();
@@ -169,7 +168,7 @@ jQuery(function($){
             success: function(html) {
                 var html_string = "";
                 for (var i in html) {
-                    html_string+="<option value="+html[i]+"></option>";
+                    html_string+="<option  value=" + html[i] + "></option>";
                 }
                 $("#city_suggest").html(html_string);
             }
@@ -212,6 +211,7 @@ jQuery(function($){
             success: function(html) {
                 if(html['res'] == 2) {
                     $("#find_form_div").css("display", "none");
+                    $("#close_find").trigger("click");
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
@@ -270,8 +270,7 @@ jQuery(function($){
             data: "submit_sign_in="+JSON.stringify(sign_in_data),
             success: function(sup) {
                 $(".modal_close").trigger('click');
-                if(sup['res'] == 1){
-
+                if(sup['res'] == 1) {
                     sign_in();
                 }
                 //TODO: callback
@@ -287,7 +286,7 @@ jQuery(function($){
             data: "sign_out= ",
             success: function(sup) {
                 if(sup['res'] == 1){
-                   sign_out();
+                    sign_out();
                 }
                 //TODO: callback
             }
@@ -296,18 +295,18 @@ jQuery(function($){
     });
     $('body').on('submit','#find_form', function (e) {
         e.preventDefault();
+        $("#close_find").trigger("click");
         var data_request = {
             'find_from': $("#from_topics_of_barter_find option:selected").val(),
             'find_to': $("#to_topics_of_barter_find option:selected").val(),
             'keywords': $("#description_find").val(),
-            'region': $("#region_find option:selected").val(),
+            'region_id': $("#region_find option:selected").val(),
+            'region_name': $("#region_find option:selected").text(),
             'city': $("#city_selected_find").val()
         };
         var search_data = {
             'find_from': $("#from_topics_of_barter_find option:selected").text(),
             'find_to': $("#to_topics_of_barter_find option:selected").text(),
-            'region': $("#region_find option:selected").text(),
-            'city': $("#city_selected_find").val()
         };
         $.ajax({
             type: 'POST',
@@ -320,22 +319,17 @@ jQuery(function($){
                 for (var i in html) {
                     var current = html[i];
                     search_result += "<div>" +
-                     "<h3>"+current['title'] + "</h3>" + "<p>" +
-                    "From:"+search_data['find_from']+"<br>" +
-                    "To:"+search_data['find_to']+"<br>" +
-                    "Region:"+search_data['region']+"<br>" +
-                    "Description:"+current['description']+"<br>" +
-                    "Contacts:"+current['contacts']+"<br>" +
-                    "Name:"+current['name']+"<br>"+ "</p>" +
-                   /* search_result += current['name']+" из " */
-                    "<div class='pictures_box'>";
-                    var media = current['media'].split(',');
-                    for (var j in media){
-                        search_result += "<img src='"+media[j]+"'/>"
-                    }
-                    search_result += "</div></div><hr>"
+                        "<a href=advertisement_page.php?id=" + current['id'] + "><h3>"+current['title'] + "</h3></a>" + "<p>" +
+                        "From:"+search_data['find_from']+"<br>" +
+                        "To:"+search_data['find_to']+"<br>" +
+                        "Region:"+current['region']+"<br>" +
+                        "City:"+current['city']+"<br>"+
+                        "Data:"+current['date']+"<br></p>" +
+                        "<div class='pictures_box'>";
+                        var media = current['media'].split(',');
+                        search_result += "<img src='"+media[0]+"'/></div></div><hr>";
                 }
-                $("#search_area").html(search_result);
+                $("#search_area").append(search_result);
                 $("#close_find").css("display","inline-block");
             }
         });
