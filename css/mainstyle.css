@@ -5,12 +5,12 @@
 -------------------- */
 
 body{
-    background: #ffffff;
+    background: #f4f4f4;
     margin: 0;
 }
 h2,h3 {
-
     font-family: Arial, Tahoma, sans-serif;
+    color: #424e5c;
 }
 
 h2{
@@ -20,7 +20,9 @@ h2{
 
 }
 h3{
-
+    font-size: x-large;
+    letter-spacing: 0.01em;
+    word-spacing: 0.05em;
 }
 hr{
     background: #fff;
@@ -28,6 +30,38 @@ hr{
     height: 2px;
     margin: 0;
 }
+
+input{
+    width: 100%;
+    height: 17px;
+    border:none;
+    padding: 5px;
+}
+
+select{
+    width: 100%;
+    height: 27px;
+    border:none;
+
+}
+
+label{
+    font-family: Arial,sans-serif;
+    font-size: 14px;
+    color:#ebebeb;
+    margin-left: 5px;
+    letter-spacing: 0.05em;
+
+}
+p{
+    color: #666;
+    font-family: tahoma, Arial, sans-serif;
+    font-size: medium;
+    line-height: 140%;
+    text-align: justify;
+}
+
+
 /*+ - - - - - - - - - - - - - - - - +*/
 
 
@@ -41,18 +75,186 @@ hr{
 #header{
     background: url('../img/system/navbar_noise.png') #d24102;
     width: 100%;
-    height: 77px;
+    padding: 20px 0 16px 0;
+    height: 40px;
+}
+.header_case{
+    margin: auto;
+    width:70%;
+    min-width: 960px;
+}
+#tools{
+    height:30px;
+    margin-top: 8px;
+    vertical-align: super;
+    position: absolute;
+    text-align: right;
+    text-transform: lowercase;
+    right: 0;
+    color:#ebebeb;
+    font-family: sans-serif;
+    font-size: 16pt;
+    min-width: 400px;
+    float: left;
+    cursor: default;
+}
+#tools a{
+    color:#e0e6e7;
+    cursor:pointer;
+    font-family: sans-serif;
+    font-size: 16pt;
+    text-shadow: 0 -1px  rgba(0, 0, 0, 0.25);
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+}
+#tools a:hover{
+    color:#eee;
+    text-shadow: none;
+}
+
+.header_case #center{
+    height: 40px;
+    position: relative;
+}
+#logotype{
+    height:40px;
+    width:250px;
+    background: #f24900;
+    float:left;
 }
 /*   ^_^    */
 
 /* body_container  */
 .body_container{
-    background: url('../img/system/body_container_background.png') repeat-x;
+    /*background: url('../img/system/body_container_background_lighter.png') repeat-x;*/
+    background: #f4f4f4;
     width:100%;
+    min-height: 568px;
+
 }
 .main_case{
     margin: auto;
     width:70%;
+    min-width: 960px;
     padding-bottom:30px;
+}
+
+.agree_button,.agree_button_mini{
+    border: 1px  solid #669933 ;
+    border-radius: 6px;
+    background: #66cc66;
+    width: 260px;
+    height: 40px;
+    font-size: 17px;
+    font-family: "Arial",sans-serif;
+    color: #fff;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+    cursor:pointer;
+    margin-left:20px;
+    box-shadow: 0 2px 0 #669933;
+}
+.agree_button_mini{
+    width:210px;
+    height:30px;
+    margin: auto;
+    border-radius: 4px;
+    display: block;
+}
+.agree_button:hover,.agree_button_mini:hover{
+    background-color: #77B557;
+    box-shadow:0 2px 0 #669933;
+    border-color: #669933;
+}
+/*.agree_button:active,.agree_button_mini:active{
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+    background: #669933;
+
+    border-color: #669933;
+}*/
+
+.agree_button:first-child{
+    margin-left: 0;
+}
+
+.functional_button{
+    background: #677397;
+    border:1px #546079 solid;
+    box-shadow: 0 2px 0 #546079;
+    border-radius: 6px;
+    width: 260px;
+    height: 40px;
+    font-size: 17px;
+    font-family: "Arial",sans-serif;
+    color: #fff;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+    cursor:pointer;
+    margin-left:20px;
+}
+.functional_button:hover{
+    background: #676E84;
+}
+.functional_button:first-child{
+    margin:0;
+}
+
+#text_box{
+    margin-left: 15px;
+}
+.button_box{
+
+}
+
+.pictures_box{
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    -ms-flex-direction: column;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    display: -webkit-box;
+    display: flex;
+    padding: 20px 0 6px 0;
+}
+
+.pictures_box img:first-child{
+    margin-left:0;
+}
+
+.pictures_box img{
+    margin-left:10px;
+    height: 120px;
+}
+
+@media screen and (max-width: 400px) {
+    #pictures_box img { margin: 0; }
+    #pictures_box { padding: 0; }
+
+}
+
+#search_area hr{
+    background:#677397;
+    height:2px;
+}
+#search_area .pictures_box{
+    margin: 10px;
+}
+#search_area p{
+    margin-left: 10px;
+}
+/*   ^_^    */
+
+
+/* Таблицы завезли и разгрузили  */
+#suggest_table{
+    width:100%;
+   /* border: 1px #aaa solid;
+    border-spacing: 26px 4px;*/
+}
+#suggest_table input{
+    width: 96%;
+}
+#suggest_table textarea{
+    width:99%;
+    height: 132px;
+    resize: none;
 }
 /*   ^_^    */
