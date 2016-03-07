@@ -16,7 +16,7 @@
     position: fixed;
     display: none;
     z-index: 5;
-    padding: 20px 35px 25px 35px;
+    padding: 20px 30px 25px 30px;
 }
 .modal_close {
     position: absolute;
