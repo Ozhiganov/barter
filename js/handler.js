@@ -129,6 +129,7 @@ jQuery(function($){
         $uploadRows.empty();
     });
     $(document).ready(function(){
+        $('#region_suggest').trigger('change');
         $.ajax({
             type: 'POST',
             url: 'identification.php',
@@ -152,8 +153,6 @@ jQuery(function($){
     $('body').on('click', '#find_btn', function (e) {
         e.preventDefault();
         $("#find_form_div").css("display", "block").hide().fadeIn(500);
-        $("#suggest_div").css("display", "none");
-        $('#region_find').trigger('change');
     });
     $('body').on('change','#region_suggest',function(e){
         e.preventDefault();
@@ -210,14 +209,12 @@ jQuery(function($){
             data: "check_status= ",
             success: function(html) {
                 if(html['res'] == 2) {
-                    $("#find_form_div").css("display", "none");
-                    $("#close_find").trigger("click");
+                    $("#find_form_div").css("display", "none").hide().fadeOut(500);;
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
                             .animate({opacity: 1, top: '6%'}, 200);
                     });
-                    $('#region_suggest').trigger('change');
                 }
                 else if(html['res'] == 1)
                     alert("Вы должны активировать свой аккаунт");
@@ -293,6 +290,7 @@ jQuery(function($){
         });
 
     });
+<<<<<<< HEAD
     $('body').on('submit','#find_form', function (e) {
         e.preventDefault();
         $("#close_find").trigger("click");
@@ -340,6 +338,8 @@ jQuery(function($){
         $("#search_area").empty();
         $("#close_find").css("display","none");
     });
+=======
+>>>>>>> master
     $('body').on('click', '#show_sign_in', function() {
         $("#overlay").fadeIn(320, function(){
             $("#hidden_sign_in_form")
