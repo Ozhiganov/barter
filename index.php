@@ -45,76 +45,85 @@
      <div id="find_area">
       <!--  <button class='agree_button' id="find_btn">Поиск по объявлениям</button>-->
         <div id="find_form_div" style="display: none">
-<<<<<<< HEAD
             <form id="find_form">
-                <br>From
+                <br><br>
+                <table id="find_table">
+                    <tr>
+                        <th style="width:30%"></th>
+                        <th  style="width:5%"></th>
+                        <th  style="width:30%"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Меняю</label>
+                            <select id="from_topics_of_barter_find">
+                                <?php include_once("main.php");
+                                      barter_topics(); ?>
+                            </select>
+                        </td>
+                            <td></td>
+                        <td>
+                            <label for="to_topics_of_barter_find">На</label>
+                            <select id="to_topics_of_barter_find">
+                                <?php barter_topics(); ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label for="description_find">Ключевые слова</label>
+                            <input type="text" id="description_find" autocomplete="off"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Регион обмена</label>
+                            <select id="region_find">
+                                <option value="0">Вся Россия</option>
+                                <?php region_selection() ?>
+                            </select>
+                        </td>
+                            <td></td>
+                        <td>
+                            <label>Город</label>
+                            <input list="city_find" id="city_selected_find" autocomplete="off">
+                            <datalist id="city_find">
+                            </datalist>
+                        </td>
+                    </tr>
+                </table>
+                <!--<label>Меняю</label>
                 <select id="from_topics_of_barter_find">
-=======
-            <form id="find_form" method="GET" action="search.php">
-                <br>From
-                <select id="from_topics_of_barter_find" name="from">
->>>>>>> master
                     <?php
-                    include_once("main.php");
+/*                    include_once("main.php");
                     barter_topics();
-                    ?>
+                    */?>
                 </select>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <br>
                 <label>На</label>
-=======
-                <br>To
->>>>>>> parent of 2efca7f... Stylez+
-=======
-                <br>To
->>>>>>> parent of 2efca7f... Stylez+
                 <select id="to_topics_of_barter_find">
-                    <?php barter_topics(); ?>
+                    <?php /*barter_topics(); */?>
                 </select>
                 <br>
-                <label>Keywords</label>
+                <label>Ключевые слова</label>
                 <input type="text" id="description_find" autocomplete="off"/>
                 <br>
-                <label>Region</label>
+                <label>Регион обмена</label>
                 <select id="region_find">
-=======
-                <br>To
-                <select id="to_topics_of_barter_find" name="to">
-                    <?php barter_topics(); ?>
-                </select>
-                <br>
-                <label>Keywords</label>
-                <input type="text" name="keywords" id="description_find" autocomplete="off"/>
-                <br>
-                <label>Region</label>
-                <select id="region_find" name="region">
->>>>>>> master
                     <option value="0">Вся Россия</option>
-                    <?php region_selection() ?>
+                    <?php /*region_selection() */?>
                 </select>
                 <br>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <label>Город</label>
-=======
-                <label>City</label>
->>>>>>> parent of 2efca7f... Stylez+
-=======
-                <label>City</label>
->>>>>>> parent of 2efca7f... Stylez+
                 <input list="city_find" id="city_selected_find" autocomplete="off">
-=======
-                <label>City</label>
-                <input list="city_find" id="city_selected_find" name="city" autocomplete="off">
->>>>>>> master
                 <datalist id="city_find">
-                </datalist>
+                    член
+                </datalist>-->
                 <br>
+                <br><br>
                 <div class="button_box">
                     <input type="submit" class="functional_button" value="Искать"/>
+                    <input type="button" class="functional_button" id="close_find" value="Прекратить поиск" style="display: none"/>
                  </div>
             </form>
         </div>
@@ -128,24 +137,30 @@
             <h2>Ваше объявление</h2>
             <form id="suggest_form">
                 <table id="suggest_table">
-                    <!--<tr>
+                    <tr>
+                        <th style="width: 40%;"></th>
+                         <th style="width: 5%;"></th><!--отступ-->
                         <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>-->
+                        <!-- <th style="width: 5%;"></th><!--отступ
+                        <th></th>-->
+                    </tr>
                     <!--Первая Строка-->
                     <tr>
-                        <td style="width:33%"><label>Хочу обменять</label><br>
+                        <td style=""><label>Хочу обменять</label><br>
                             <select id="from_topics_of_barter_suggest">
                                 <?php include_once("../main.php"); barter_topics(); ?>
                             </select>
                         </td>
-                        <td style="width:33%"></td>
-                        <td style="width:33%">
+                         <td></td>
+                        <td style="">
                             <label>На</label><br>
                             <select id="to_topics_of_barter_suggest">
                                 <?php barter_topics(); ?>
                             </select>
+                        </td>
+                         <td></td>
+                        <td style="">
+
                         </td>
                     </tr>
                     <!--Вторая, третья, четвертая Строки-->
@@ -154,7 +169,8 @@
                             <label>Заголовок объявления</label>
                             <input type="text" id="title_suggest" required autocomplete="off"/>
                         </td>
-                        <td colspan="2" rowspan="3">
+                         <td></td>
+                        <td colspan="1" rowspan="3">
                             <label>Описание</label><br>
                            <!-- <input type="text" id="description_suggest" autocomplete="off" required/>-->
                             <textarea id="description_suggest"></textarea>
@@ -183,29 +199,31 @@
                                 <?php region_selection()?>
                             </select>
                         </td>
+                         <td></td>
                         <td>
                             <label>Город</label><br>
                             <input list="city_suggest" id="city_selected_suggest" required autocomplete="off">
                             <datalist id="city_suggest" autocomplete="off">
                             </datalist>
                         </td>
+                         <td></td>
                         <td>
-                            <div class="functional_button" style="height: 24px;  border-radius:4px;   width: 290px; margin-top: 18px;overflow: hidden;"><input type="file"   id="file_input" name="my-file"/></div>
-
+                           <!-- <div class="functional_button" style="height: 24px;  border-radius:4px;   width: 290px; margin-top: 18px;overflow: hidden;"><input type="file"   id="file_input" name="my-file"/></div>-->
                         </td>
 
                     </tr>
 
                 </table>
                 <div id="upload_pic" class="pictures_box">
-
+                    <div class="functional_button" style="height: 24px;  border-radius:4px;   width: 290px; margin-top: 16px;overflow: hidden;"><input type="file"   id="file_input" name="my-file"/></div>
                 </div>
-                <br><br>
+
                 <input class="agree_button" style="margin-left: 0; border-radius:4px;  height:30px; width: 360px;" type="submit" value="Разместить объявление"/>
                 <input type="button" id="clear_btn"  class="functional_button" style="height:30px; border-radius:4px;" value="Убрать фотографии"/>
             </form>
         </div>
     </div>
+    <div id="search_area"></div>
 
 
        <!--ФОРМА АВТОРИЗАЦИИ В ОКНЕ-->
