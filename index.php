@@ -45,7 +45,7 @@
      <div id="find_area">
       <!--  <button class='agree_button' id="find_btn">Поиск по объявлениям</button>-->
         <div id="find_form_div" style="display: none">
-            <form id="find_form">
+            <form id="find_form"  method="GET" action="search.php">
                 <br><br>
                 <table id="find_table">
                     <tr>
@@ -56,7 +56,7 @@
                     <tr>
                         <td>
                             <label>Меняю</label>
-                            <select id="from_topics_of_barter_find">
+                            <select id="from_topics_of_barter_find" name="from">
                                 <?php include_once("main.php");
                                       barter_topics(); ?>
                             </select>
@@ -64,7 +64,7 @@
                             <td></td>
                         <td>
                             <label for="to_topics_of_barter_find">На</label>
-                            <select id="to_topics_of_barter_find">
+                            <select id="to_topics_of_barter_find" name="to">
                                 <?php barter_topics(); ?>
                             </select>
                         </td>
@@ -72,13 +72,13 @@
                     <tr>
                         <td colspan="3">
                             <label for="description_find">Ключевые слова</label>
-                            <input type="text" id="description_find" autocomplete="off"/>
+                            <input name="keywords" type="text" id="description_find" autocomplete="off"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label>Регион обмена</label>
-                            <select id="region_find">
+                            <select id="region_find" name="region">
                                 <option value="0">Вся Россия</option>
                                 <?php region_selection() ?>
                             </select>
@@ -86,44 +86,16 @@
                             <td></td>
                         <td>
                             <label>Город</label>
-                            <input list="city_find" id="city_selected_find" autocomplete="off">
+                            <input name="city" list="city_find" id="city_selected_find" autocomplete="off">
                             <datalist id="city_find">
                             </datalist>
                         </td>
                     </tr>
                 </table>
-                <!--<label>Меняю</label>
-                <select id="from_topics_of_barter_find">
-                    <?php
-/*                    include_once("main.php");
-                    barter_topics();
-                    */?>
-                </select>
-                <br>
-                <label>На</label>
-                <select id="to_topics_of_barter_find">
-                    <?php /*barter_topics(); */?>
-                </select>
-                <br>
-                <label>Ключевые слова</label>
-                <input type="text" id="description_find" autocomplete="off"/>
-                <br>
-                <label>Регион обмена</label>
-                <select id="region_find">
-                    <option value="0">Вся Россия</option>
-                    <?php /*region_selection() */?>
-                </select>
-                <br>
-                <label>Город</label>
-                <input list="city_find" id="city_selected_find" autocomplete="off">
-                <datalist id="city_find">
-                    член
-                </datalist>-->
                 <br>
                 <br><br>
                 <div class="button_box">
                     <input type="submit" class="functional_button" value="Искать"/>
-                    <input type="button" class="functional_button" id="close_find" value="Прекратить поиск" style="display: none"/>
                  </div>
             </form>
         </div>
@@ -223,7 +195,6 @@
             </form>
         </div>
     </div>
-    <div id="search_area"></div>
 
 
        <!--ФОРМА АВТОРИЗАЦИИ В ОКНЕ-->

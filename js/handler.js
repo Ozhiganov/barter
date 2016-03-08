@@ -104,7 +104,6 @@ jQuery(function($){
                 'city': $("#city_selected_suggest").val(),
                 'media': media
             };
-            alert(data.description);
             $.ajax({
                 type: 'POST',
                 url: 'queries.php',
@@ -129,6 +128,7 @@ jQuery(function($){
         $uploadRows.empty();
     });
     $(document).ready(function(){
+        $('#region_suggest').trigger('change');
         $.ajax({
             type: 'POST',
             url: 'identification.php',
@@ -152,8 +152,6 @@ jQuery(function($){
     $('body').on('click', '#find_btn', function (e) {
         e.preventDefault();
         $("#find_form_div").css("display", "block").hide().fadeIn(500);
-        $("#suggest_div").css("display", "none");
-        $('#region_find').trigger('change');
     });
     $('body').on('change','#region_suggest',function(e){
         e.preventDefault();
@@ -210,14 +208,13 @@ jQuery(function($){
             data: "check_status= ",
             success: function(html) {
                 if(html['res'] == 2) {
-                    $("#find_form_div").css("display", "none");
+                    $("#find_form_div").css("display", "none").hide().fadeOut(500);
                     $("#close_find").trigger("click");
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
                             .animate({opacity: 1, top: '6%'}, 200);
                     });
-                    $('#region_suggest').trigger('change');
                 }
                 else if(html['res'] == 1)
                     alert("Вы должны активировать свой аккаунт");
@@ -292,53 +289,6 @@ jQuery(function($){
             }
         });
 
-    });
-    $('body').on('submit','#find_form', function (e) {
-        e.preventDefault();
-        $("#close_find").trigger("click");
-        var data_request = {
-            'find_from': $("#from_topics_of_barter_find option:selected").val(),
-            'find_to': $("#to_topics_of_barter_find option:selected").val(),
-            'keywords': $("#description_find").val(),
-            'region_id': $("#region_find option:selected").val(),
-            'region_name': $("#region_find option:selected").text(),
-            'city': $("#city_selected_find").val()
-        };
-        var search_data = {
-            'find_from': $("#from_topics_of_barter_find option:selected").text(),
-            'find_to': $("#to_topics_of_barter_find option:selected").text(),
-        };
-        $.ajax({
-            type: 'POST',
-            url: 'queries.php',
-            dataType: 'json',
-            data: "find="+JSON.stringify(data_request),
-            success: function(html) {
-                $("#suggest_area").css("display","none");
-                var search_result = "";
-                for (var i in html) {
-                    var current = html[i];
-                    search_result += "<div>" +
-                        "<a href=advertisement_page/" + current['id'] + "><h3>"+current['title'] + "</h3></a>" + "<p>" +
-                        "From:"+search_data['find_from']+"<br>" +
-                        "To:"+search_data['find_to']+"<br>" +
-                        "Region:"+current['region']+"<br>" +
-                        "City:"+current['city']+"<br>"+
-                        "Data:"+current['date']+"<br></p>" +
-                        "<div class='pictures_box'>";
-                        var media = current['media'].split(',');
-                        search_result += "<img src='"+media[0]+"'/></div></div><hr>";
-                }
-                $("#search_area").append(search_result);
-                $("#close_find").css("display","inline-block");
-            }
-        });
-    });
-    $('body').on('click', '#close_find', function(e) {
-        e.preventDefault();
-        $("#suggest_area").css("display","block");
-        $("#search_area").empty();
-        $("#close_find").css("display","none");
     });
     $('body').on('click', '#show_sign_in', function() {
         $("#overlay").fadeIn(320, function(){
