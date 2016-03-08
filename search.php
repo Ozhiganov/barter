@@ -28,6 +28,7 @@
 <hr>
 <div id="overlay"></div>
 <div class="body_container">
+    <div class="main_case">
     <form id="find_form"  method="GET" action="search.php">
         <br><br>
         <table id="find_table">
@@ -143,11 +144,11 @@
             $current_city = $city_name;
         echo "<div>
                 <a href=advertisement_page.php?id=" . $val[id] . "><h3>" . $val[title] . "</h3></a>
-                <p>From: " . $from_topic[0][name] . "<br>
-                To: " . $to_topic[0][name] . "<br>
-                Region: " . $current_region . "<br>
-                City: " . $current_city . "<br>
-                Date: " . strftime("%d.%m.%Y %H:%M", $val[publish_date]) . "<br></p>
+                <p>Меняю: " . $from_topic[0][name] . "<br>
+                На: " . $to_topic[0][name] . "<br>
+                Регион: " . $current_region . "<br>
+                Город: " . $current_city . "<br>
+                Дата: " . strftime("%d.%m.%Y %H:%M", $val[publish_date]) . "<br></p>
                 <div class='pictures_box'>";
         $media = preg_split("/[,]+/",$val[media]);
         foreach($media as $value)
@@ -205,4 +206,5 @@
         </form>
     </div>
 </div>
+    </div>
 </body>
