@@ -46,6 +46,14 @@ select{
 
 }
 
+.reg_block {
+    font-family: Arial,sans-serif;
+    font-size: 14px;
+    color: red;
+    margin-left: 5px;
+    letter-spacing: 0.05em;
+}
+
 label{
     font-family: Arial,sans-serif;
     font-size: 14px;
@@ -312,6 +320,6 @@ p{
     border: 2px solid rgba(84, 96, 121, 0.5);
 }
 /*   ^_^    */
-#reg_block{
+.reg_block{
     display: none;
  }

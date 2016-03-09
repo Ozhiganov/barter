@@ -63,7 +63,7 @@ jQuery(function($){
     };
 
     // Uploader events
-    $('#file_input').on({
+    input_file.on({
         'du.add' : fileAddHandler,
 
         'du.limit' : function() {
@@ -193,7 +193,7 @@ jQuery(function($){
                 }
                 else if(html['res'] == 1) {
                     $("#overlay").fadeIn(400, function(){
-                        $("##message_container")
+                        $("#message_container")
                             .css('display', 'block')
                             .animate({opacity: 1, top: '6%'}, 200);
                     });
@@ -236,33 +236,30 @@ jQuery(function($){
             dataType: 'json',
             data: "submit_sign_up="+JSON.stringify(sign_up_data),
             success: function(sup) {
-                alert(sup['res']);
-                $("#sign_up_form").trigger('reset');
-                //$(".modal_close").trigger('click');
-                //TODO: callback
+                $('input').css('border','');
+                $('.reg_block').css('display','none');
                 switch(sup['res']){
                     case 'mail_suc':
-                        //Успершное мыло, проверьте почту
-                        // $('#mail_suc').style.display='none';
+                        $("#sign_up_form").trigger('reset');
+                        $(".modal_close").trigger('click');
+                        alert("Проверте почту");
                         break;
                     case 'unknown':
                         //Неизвестная ошибка
-                        //$('#unknown').style.display='none';
                         break;
                     case 'email_error':
-                        //Емейл занят
+                        $('#email').css("border", "1px solid red");
                         $('#email_block').css("display","inline");
                         break;
                      case 'login_error':
-                        //ошибка логина
+                        $('#reg_login').css("border", "1px solid red");
                         $('#login_block').css("display","inline");
                         break;
                       case 'password_error':
-                        //пароли не совпадают
+                        $('#reg_password, #password_check').css("border", "1px solid red");
                         $('#password_check_block').css("display","inline");
                         break;
                  }
-                }
             }
         });
     });
@@ -316,10 +313,5 @@ jQuery(function($){
                 .css('display', 'block')
                 .animate({opacity: 1}, 160);
         });
-        $("#email_block").hide();
-        $("#login_block").hide();
-        $("#password_check_block").hide();
-        $("#unknown").hide();
-        $("#mail_suc").hide();
     });
 });
