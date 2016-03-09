@@ -229,15 +229,19 @@
                 <br><br>
                 <label for="login">Логин</label><br>
                 <input type="text" name="login"  id='reg_login' autocomplete="off" required>
+                <div class="reg_block" id="login_block">login msg</div> //Ошибка ввода логина
                 <br><br>
                 <label for="email">Ваш email | электронная почта</label><br>
                 <input type="email" name="email"  id='email' autocomplete="off" placeholder="" required>
+                <div class="reg_block" id="email_block">eail msg</div>//
                 <br><br>
                 <label for="password">Пароль</label><br>
                 <input type="password" name="password" id='reg_password' autocomplete="off" required>
+                <div class="reg_block" id="password_block">pass msg</div>
                 <br><br>
                 <label for="password_check">И ещё раз пароль</label><br>
                 <input type="password" name="password_check" id="password_check" autocomplete="off" required>
+                <dv class="reg_block" id="password_check_block">пароли не совпадают</dv>
                 <br><br>
                 <br>
                     <input type="submit" class="agree_button_mini" name="submit_sign_up" value="Зарегистрироваться">
