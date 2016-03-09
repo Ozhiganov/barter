@@ -26,17 +26,17 @@ if ($_POST['submit_sign_up']){
                         $body = '';
 
                         mail($to, $subject, "Здравствуйте.\nДля окончания регистрации на сайте bartbord.ru перейдите по ссылке\nhttp:/barter/activation/" . $activation . "\nЕсли вы не регистрировались на этом сайте, проигнорируйте это письмо.");
-                        echo json_encode(array("res" => "Проверьте почту :)"));
+                        echo json_encode(array("res" => "mail_suc"));
                         exit();
-                    } else echo(json_encode(array("res" => "something wrong")));
+                    } else echo(json_encode(array("res" => "unknown")));
 
-                } else echo(json_encode(array("res" => "Регистрация неуспешна: такой e-mail «" . $sign_up_fields->email . "» занят :( ")));
-            } else echo(json_encode(array("res" => "Регистрация неуспешна: логин «" . $sign_up_fields->login . "» занят :( ")));
+                } else echo(json_encode(array("res" => "email_error")));
+            } else echo(json_encode(array("res" => "login_error")));
 
         }
     }
     else
-        echo json_encode(array("res" => "Пароли не совпадают"));
+        echo json_encode(array("res" => "password_error"));
 }
 
 if($_POST['submit_sign_in']){

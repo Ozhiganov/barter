@@ -248,8 +248,31 @@ jQuery(function($){
             success: function(sup) {
                 alert(sup['res']);
                 $("#sign_up_form").trigger('reset');
-                $(".modal_close").trigger('click');
+                //$(".modal_close").trigger('click');
                 //TODO: callback
+                switch(sup['res']){
+                    case 'mail_suc':
+                        //Успершное мыло, проверьте почту
+                        // $('#mail_suc').style.display='none';
+                        break;
+                    case 'unknown':
+                        //Неизвестная ошибка
+                        //$('#unknown').style.display='none';
+                        break;
+                    case 'email_error':
+                        //Емейл занят
+                        $('#email_block').css("display","inline");
+                        break;
+                     case 'login_error':
+                        //ошибка логина
+                        $('#login_block').css("display","inline");
+                        break;
+                      case 'password_error':
+                        //пароли не совпадают
+                        $('#password_check_block').css("display","inline");
+                        break;
+                 }
+                }
             }
         });
     });
@@ -303,5 +326,10 @@ jQuery(function($){
                 .css('display', 'block')
                 .animate({opacity: 1}, 160);
         });
+        $("#email_block").hide();
+        $("#login_block").hide();
+        $("#password_check_block").hide();
+        $("#unknown").hide();
+        $("#mail_suc").hide();
     });
 });
