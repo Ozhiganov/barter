@@ -229,11 +229,11 @@
                 <br><br>
                 <label for="login">Логин</label><br>
                 <input type="text" name="login"  id='reg_login' autocomplete="off" required>
-                <div class="reg_block" id="login_block">login msg</div> //Ошибка ввода логина
+                <div class="reg_block" id="login_block">login msg</div> <!--Ошибка ввода логина-->
                 <br><br>
                 <label for="email">Ваш email | электронная почта</label><br>
                 <input type="email" name="email"  id='email' autocomplete="off" placeholder="" required>
-                <div class="reg_block" id="email_block">eail msg</div>//
+                <div class="reg_block" id="email_block">email msg</div>
                 <br><br>
                 <label for="password">Пароль</label><br>
                 <input type="password" name="password" id='reg_password' autocomplete="off" required>

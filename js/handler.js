@@ -250,7 +250,7 @@ jQuery(function($){
                 $("#sign_up_form").trigger('reset');
                 //$(".modal_close").trigger('click');
                 //TODO: callback
-                switch(sup['res']){
+                switch(sup['res']) {
                     case 'mail_suc':
                         //Успершное мыло, проверьте почту
                         // $('#mail_suc').style.display='none';
@@ -261,18 +261,17 @@ jQuery(function($){
                         break;
                     case 'email_error':
                         //Емейл занят
-                        $('#email_block').css("display","inline");
+                        $('#email_block').css("display", "inline");
                         break;
-                     case 'login_error':
+                    case 'login_error':
                         //ошибка логина
-                        $('#login_block').css("display","inline");
+                        $('#login_block').css("display", "inline");
                         break;
-                      case 'password_error':
+                    case 'password_error':
                         //пароли не совпадают
-                        $('#password_check_block').css("display","inline");
+                        $('#password_check_block').css("display", "inline");
                         break;
-                 }
-                }
+                };
             }
         });
     });
