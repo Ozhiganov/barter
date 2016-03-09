@@ -118,6 +118,7 @@ p{
     position: relative;
 }
 #logotype{
+    cursor: pointer;
     height:40px;
     width:250px;
     background: #f24900;

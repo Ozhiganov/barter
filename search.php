@@ -124,6 +124,7 @@
         $region_name = null;
         $city_name = null;
     }
+    $find_query .= "ORDER BY `publish_date` DESC";
     $find_result = $find_db->query($find_query);
     $find_result_array = $find_result->fetch_all(MYSQLI_ASSOC);
     setlocale(LC_ALL, "Russian");
@@ -151,9 +152,7 @@
                 Дата: " . strftime("%d.%m.%Y %H:%M", $val[publish_date]) . "<br></p>
                 <div class='pictures_box'>";
         $media = preg_split("/[,]+/",$val[media]);
-        foreach($media as $value)
-            echo "<img src='$value'/>";
-        echo "</div></div><hr>";
+        echo "<img src='$media[0]'/></div></div><hr>";
     }
     $find_db->close();
     ?>

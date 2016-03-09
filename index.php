@@ -244,10 +244,17 @@
                 <dv class="reg_block" id="password_check_block">пароли не совпадают</dv>
                 <br><br>
                 <br>
-                    <input type="submit" class="agree_button_mini" name="submit_sign_up" value="Зарегистрироваться">
-                    <span class='msg'><?php echo $message; ?></span>
-                </form>
-            </div>
+                <input type="submit" class="agree_button_mini" name="submit_sign_up" value="Зарегистрироваться">
+                <span class='msg'><?php echo $message; ?></span>
+            </form>
+        </div>
+
+
+        <div id="message_container" class="modal_div">
+            <span class="modal_close" style="right: 20px;">x</span>
+            <h2>Сообщение системы</h2>
+            <label id="message"></label>
+        </div>
 
  </div>
 

@@ -12,14 +12,9 @@ jQuery(function($){
         $("#show_sign_in").css("display","inline-block");
     }
 
-    //FOR damnUploader
-    var $fileInput = $('#file_input');
-    var $uploadForm = $('#suggest_form');
-    var $uploadRows = $('#upload_pic');
-    var $clearBtn = $('#clear_btn');
     var media = "";
-
-    $fileInput.damnUploader({
+    var input_file = $('#file_input');
+    input_file.damnUploader({
         url: 'queries.php',
         fieldName:  'my-file',
         limit: 5,
@@ -46,11 +41,8 @@ jQuery(function($){
 
     // File adding handler
     var fileAddHandler = function(e) {
-        // e.uploadItem represents uploader task as special object,
-        // that allows us to define complete & progress callbacks as well as some another parameters
-        // for every single upload
         var ui  = e.uploadItem;
-        var filename = ui.file.name || ""; // Filename property may be absent when adding custom data
+        var filename = ui.file.name || "";
 
         if (!isImgFile(ui.file)) {
             alert("This file is not a picture");
@@ -58,34 +50,20 @@ jQuery(function($){
             return ;
         }
 
-        // We can replace original filename if needed
         if (!filename.length) {
             ui.replaceName = "custom-data";
         } else if (filename.length > 14) {
             ui.replaceName = filename.substr(0, 10) + "_" + filename.substr(filename.lastIndexOf('.'));
         }
 
-        // We can add some data to POST in upload request
-        //ui.addPostData($uploadForm.serializeArray()); // from array
-        //ui.addPostData('original-filename', filename); // .. or as field/value pair
-        // Show info and response when upload completed
         createRowFromUploadItem(ui);
         ui.completeCallback = function(success, data, errorCode) {
             media += "," + data['status'];
         };
-
-        // Updating progress bar value in progress callback
-//                ui.progressCallback = function(percent) {
-//                    $progressBar.css('width', Math.round(percent) + '%');
-//                };
-
     };
 
-
-    ///// Setting up events handlers
-
     // Uploader events
-    $fileInput.on({
+    $('#file_input').on({
         'du.add' : fileAddHandler,
 
         'du.limit' : function() {
@@ -111,10 +89,8 @@ jQuery(function($){
                 data: "suggest="+JSON.stringify(data),
                 success: function(html) {
                     $("#suggest_form").trigger('reset');
-                    $clearBtn.trigger('click');
+                    $('#clear_btn').trigger('click');
                     $(".modal_close").trigger('click');
-
-                    alert(html['res']);
                     //TODO: callback
                 }
             });
@@ -123,9 +99,9 @@ jQuery(function($){
     });
 
     // Clear button
-    $clearBtn.on('click', function() {
-        $fileInput.duCancelAll();
-        $uploadRows.empty();
+    $('#clear_btn').on('click', function() {
+        input_file.duCancelAll();
+        $('#upload_pic').empty();
     });
     $(document).ready(function(){
         $('#region_suggest').trigger('change');
@@ -209,17 +185,28 @@ jQuery(function($){
             success: function(html) {
                 if(html['res'] == 2) {
                     $("#find_form_div").css("display", "none").hide().fadeOut(500);
-                    $("#close_find").trigger("click");
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
                             .animate({opacity: 1, top: '6%'}, 200);
                     });
                 }
-                else if(html['res'] == 1)
-                    alert("Вы должны активировать свой аккаунт");
-                else
-                    alert("Вы должны зарегистрироваться, чтобы размещать объявления");
+                else if(html['res'] == 1) {
+                    $("#overlay").fadeIn(400, function(){
+                        $("##message_container")
+                            .css('display', 'block')
+                            .animate({opacity: 1, top: '6%'}, 200);
+                    });
+                    $("#message").html("Вы должны активировать свой аккаунт, чтобы размещать объявления");
+                }
+                else {
+                    $("#overlay").fadeIn(400, function(){
+                        $("#message_container")
+                            .css('display', 'block')
+                            .animate({opacity: 1, top: '6%'}, 200);
+                    });
+                    $("#message").html("Вы должны зарегистрироваться, чтобы размещать объявления");
+                }
 
             }
         });
@@ -228,8 +215,11 @@ jQuery(function($){
     $('body').on('submit', '#suggest_form', function (e) {
         e.preventDefault();
         if ($.support.fileSending) {
-            $fileInput.duStart();
+            input_file.duStart();
         }
+    });
+    $('body').on('click','#logotype',function() {
+        window.location = 'index.php';
     });
     $('body').on('submit','#sign_up_form', function (e){
         e.preventDefault();
