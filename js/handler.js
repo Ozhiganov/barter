@@ -1,15 +1,11 @@
 jQuery(function($){
 
     function sign_in() {
-        $("#sign_out").css("display","inline-block");
-        $("#show_sign_up").css("display","none");
-        $("#show_sign_in").css("display","none");
+        $("#tools").html("<a id='cabinet'>Личный кабинет</a> | <a id='sign_out'>Выйти</a>");
     }
 
     function sign_out() {
-        $("#sign_out").css("display","none");
-        $("#show_sign_up").css("display","inline-block");
-        $("#show_sign_in").css("display","inline-block");
+        $("#tools").html("<a id='show_sign_up'>Зарегистрироваться</a> | <a id='show_sign_in'>Войти</a>");
     }
 
     var media = "";
@@ -90,7 +86,11 @@ jQuery(function($){
                 success: function(html) {
                     $("#suggest_form").trigger('reset');
                     $('#clear_btn').trigger('click');
-                    $(".modal_close").trigger('click');
+                    $("#suggest_div").css('display', 'none')
+                    $("#message_container")
+                        .css('display', 'block')
+                        .animate({opacity: 1, top: '6%'}, 200);
+                    $("#message").html("Ваше объявление успешно размещено");
                     //TODO: callback
                 }
             });
@@ -124,6 +124,9 @@ jQuery(function($){
             $(this).css('display', 'none');
             $('#overlay').fadeOut(400);
         })
+    });
+    $('body').on('click','#cabinet', function(){
+        window.location = 'cabinet.php';
     });
     $('body').on('click', '#find_btn', function (e) {
         e.preventDefault();
@@ -241,8 +244,11 @@ jQuery(function($){
                 switch(sup['res']){
                     case 'mail_suc':
                         $("#sign_up_form").trigger('reset');
-                        $(".modal_close").trigger('click');
-                        alert("Проверте почту");
+                        $("#hidden_sign_up_form").css('display', 'none')
+                        $("#message_container")
+                            .css('display', 'block')
+                            .animate({opacity: 1, top: '6%'}, 200);
+                        $("#message").html("Для завершения регистрации проверьте почту, которую вы указали при регистрации и проследуйте инструкциям");
                         break;
                     case 'unknown':
                         //Неизвестная ошибка
@@ -276,9 +282,15 @@ jQuery(function($){
             dataType: 'json',
             data: "submit_sign_in="+JSON.stringify(sign_in_data),
             success: function(sup) {
-                $(".modal_close").trigger('click');
                 if(sup['res'] == 1) {
+                    $('input').css('border','');
+                    $('.reg_block').css('display','none');
+                    $(".modal_close").trigger('click');
                     sign_in();
+                }
+                else {
+                    $('#login, #password').css("border", "1px solid red");
+                    $('#auth_block').css("display","inline");
                 }
                 //TODO: callback
             }

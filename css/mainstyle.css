@@ -52,6 +52,7 @@ select{
     color: red;
     margin-left: 5px;
     letter-spacing: 0.05em;
+    display: none;
 }
 
 label{
@@ -319,7 +320,3 @@ p{
     box-sizing: border-box;
     border: 2px solid rgba(84, 96, 121, 0.5);
 }
-/*   ^_^    */
-.reg_block{
-    display: none;
- }

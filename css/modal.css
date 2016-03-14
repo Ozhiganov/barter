@@ -18,6 +18,9 @@
     z-index: 5;
     padding: 20px 35px 25px 35px;
 }
+#message_container {
+    z-index: 6;
+}
 .modal_close {
     position: absolute;
     top: 10px;

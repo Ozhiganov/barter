@@ -17,9 +17,6 @@
             </div>
 
             <div id="tools">
-                <a id="show_sign_up">Зарегистрироваться</a> |
-                <a id="show_sign_in">Войти</a>
-                <a id="sign_out">Выйти</a>
             </div>
 
         </div>
@@ -186,8 +183,9 @@
                     </tr>
 
                 </table>
+                <div class="functional_button" style="height: 24px;  border-radius:4px;   width: 290px; margin-top: 16px;overflow: hidden;"><input type="file"   id="file_input" name="my-file"/></div>
                 <div id="upload_pic" class="pictures_box">
-                    <div class="functional_button" style="height: 24px;  border-radius:4px;   width: 290px; margin-top: 16px;overflow: hidden;"><input type="file"   id="file_input" name="my-file"/></div>
+
                 </div>
 
                 <input class="agree_button" style="margin-left: 0; border-radius:4px;  height:30px; width: 360px;" type="submit" value="Разместить объявление"/>
@@ -210,6 +208,7 @@
                 <br><br>
                 <label for="password">Пароль</label><br>
                 <input type="password" name="password" id='password' autocomplete="off" required>
+                <span class="reg_block" id="auth_block">Неверная пара логин/пароль</span>
                 <br><br>
                 <br>
                 <input type="submit" class="agree_button_mini" style=""  name="hidden_sign_in_form" value="Авторизоваться">

@@ -35,9 +35,6 @@ if($_GET['act']) {
             </div>
 
             <div id="tools">
-                <a id="show_sign_up">Зарегистрироваться</a> |
-                <a id="show_sign_in">Войти</a>
-                <a id="sign_out">Выйти</a>
             </div>
 
         </div>
