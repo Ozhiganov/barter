@@ -32,7 +32,7 @@
      <br>
      <div id="text_box">
         <h3>Бесплатная доска бартерных объявлений</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</p>
+        <p>Дорогие друзья! Вашему вниманию представлен сайт бесплатных объявлений по обмену интересующих Вас товаров. Здесь Вы можете поменять авто на авто, дом на дом, авто на дом и т.д. У многих из Вас скопилась куча ненужных, но еще хороших вещей (одежда, бытовая техника, посуда, инструмент, видео аппаратура, яхты, корабли и самолеты). Только на нашем сайте, вы в достойном качестве можете осуществить свою мечту: избавиться от лишнего, и приобрести действительно нужные для вас вещи!</p>
      </div>
      <br>
      <div class="button_box">
@@ -50,26 +50,27 @@
                         <th  style="width:5%"></th>
                         <th  style="width:30%"></th>
                     </tr>
+
+                    <tr>
+                        <td colspan="3">
+                            <label for="description_find" style="display: none;">Ключевые слова</label>
+                            <input name="keywords" type="text" id="description_find" placeholder="поиск по объявлениям" autocomplete="off"/>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label>Меняю</label>
                             <select id="from_topics_of_barter_find" name="from">
                                 <?php include_once("main.php");
-                                      barter_topics(); ?>
+                                barter_topics(); ?>
                             </select>
                         </td>
-                            <td></td>
+                        <td></td>
                         <td>
                             <label for="to_topics_of_barter_find">На</label>
                             <select id="to_topics_of_barter_find" name="to">
                                 <?php barter_topics(); ?>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <label for="description_find">Ключевые слова</label>
-                            <input name="keywords" type="text" id="description_find" autocomplete="off"/>
                         </td>
                     </tr>
                     <tr>
@@ -243,7 +244,7 @@
                 <span class="reg_block" id="password_check_block">Пароли не совпадают</span>
                 <br><br>
                 <br>
-                <input type="submit" class="agree_button_mini" name="submit_sign_up" value="Зарегистрироваться">
+                <input type="submit" style="    width: 270px;" class="agree_button_mini" name="submit_sign_up" value="Зарегистрироваться">
                 <span class='msg'><?php echo $message; ?></span>
             </form>
         </div>
@@ -252,7 +253,7 @@
         <div id="message_container" class="modal_div">
             <span class="modal_close" style="right: 20px;">x</span>
             <h2>Сообщение системы</h2>
-            <label id="message"></label>
+            <p id="message"></p>
         </div>
 
  </div>

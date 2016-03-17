@@ -89,7 +89,7 @@ jQuery(function($){
                     $("#suggest_div").css('display', 'none')
                     $("#message_container")
                         .css('display', 'block')
-                        .animate({opacity: 1, top: '6%'}, 200);
+                        .animate({opacity: 1, top: '0%'}, 200);
                     $("#message").html("Ваше объявление успешно размещено");
                     //TODO: callback
                 }
@@ -191,14 +191,14 @@ jQuery(function($){
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '6%'}, 200);
+                            .animate({opacity: 1, top: '0%'}, 200);
                     });
                 }
                 else if(html['res'] == 1) {
                     $("#overlay").fadeIn(400, function(){
                         $("#message_container")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '6%'}, 200);
+                            .animate({opacity: 1, top: '30%'}, 200);
                     });
                     $("#message").html("Вы должны активировать свой аккаунт, чтобы размещать объявления");
                 }
@@ -206,7 +206,7 @@ jQuery(function($){
                     $("#overlay").fadeIn(400, function(){
                         $("#message_container")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '6%'}, 200);
+                            .animate({opacity: 1, top: '30%'}, 200);
                     });
                     $("#message").html("Вы должны зарегистрироваться, чтобы размещать объявления");
                 }
@@ -247,7 +247,7 @@ jQuery(function($){
                         $("#hidden_sign_up_form").css('display', 'none')
                         $("#message_container")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '6%'}, 200);
+                            .animate({opacity: 1, top: '30%'}, 200);
                         $("#message").html("Для завершения регистрации проверьте почту, которую вы указали при регистрации и проследуйте инструкциям");
                         break;
                     case 'unknown':

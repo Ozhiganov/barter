@@ -35,6 +35,12 @@
                 <th  style="width:30%"></th>
             </tr>
             <tr>
+                <td colspan="3">
+                    <label for="description_find" style="display: none;">Ключевые слова</label>
+                    <input name="keywords" type="text" id="description_find" placeholder="поиск по объявлениям" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <label>Меняю</label>
                     <select id="from_topics_of_barter_find" name="from">
@@ -48,12 +54,6 @@
                     <select id="to_topics_of_barter_find" name="to">
                         <?php barter_topics(); ?>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <label for="description_find">Ключевые слова</label>
-                    <input name="keywords" type="text" id="description_find" autocomplete="off"/>
                 </td>
             </tr>
             <tr>
@@ -140,16 +140,24 @@
         }
         else
             $current_city = $city_name;
-        echo "<div>
-                <a href=advertisement_page.php?id=" . $val[id] . "><h3>" . $val[title] . "</h3></a>
-                <p>Меняю: " . $from_topic[0][name] . "<br>
+
+        $media = preg_split("/[,]+/",$val[media]);
+
+        echo "
+            <a href=advertisement_page.php?id=" . $val[id] . "><h3>" . $val[title] . "</h3></a>
+        <div class='pictures_box'>
+
+        <img src='$media[0]'/></div>
+        <div style='
+        width: 400px;
+        height: 200px;'>
+             <p>Меняю: " . $from_topic[0][name] . "<br>
                 На: " . $to_topic[0][name] . "<br>
                 Регион: " . $current_region . "<br>
                 Город: " . $current_city . "<br>
                 Дата: " . strftime("%d.%m.%Y %H:%M", $val[publish_date]) . "<br></p>
-                <div class='pictures_box'>";
-        $media = preg_split("/[,]+/",$val[media]);
-        echo "<img src='$media[0]'/></div></div><hr>";
+        </div>
+        <hr>";
     }
     $find_db->close();
     ?>
