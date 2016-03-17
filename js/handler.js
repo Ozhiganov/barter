@@ -1,25 +1,16 @@
 jQuery(function($){
 
     function sign_in() {
-        $("#sign_out").css("display","inline-block");
-        $("#show_sign_up").css("display","none");
-        $("#show_sign_in").css("display","none");
+        $("#tools").html("<a id='cabinet'>Личный кабинет</a> | <a id='sign_out'>Выйти</a>");
     }
 
     function sign_out() {
-        $("#sign_out").css("display","none");
-        $("#show_sign_up").css("display","inline-block");
-        $("#show_sign_in").css("display","inline-block");
+        $("#tools").html("<a id='show_sign_up'>Зарегистрироваться</a> | <a id='show_sign_in'>Войти</a>");
     }
 
-    //FOR damnUploader
-    var $fileInput = $('#file_input');
-    var $uploadForm = $('#suggest_form');
-    var $uploadRows = $('#upload_pic');
-    var $clearBtn = $('#clear_btn');
     var media = "";
-
-    $fileInput.damnUploader({
+    var input_file = $('#file_input');
+    input_file.damnUploader({
         url: 'queries.php',
         fieldName:  'my-file',
         limit: 5,
@@ -46,11 +37,8 @@ jQuery(function($){
 
     // File adding handler
     var fileAddHandler = function(e) {
-        // e.uploadItem represents uploader task as special object,
-        // that allows us to define complete & progress callbacks as well as some another parameters
-        // for every single upload
         var ui  = e.uploadItem;
-        var filename = ui.file.name || ""; // Filename property may be absent when adding custom data
+        var filename = ui.file.name || "";
 
         if (!isImgFile(ui.file)) {
             alert("This file is not a picture");
@@ -58,34 +46,20 @@ jQuery(function($){
             return ;
         }
 
-        // We can replace original filename if needed
         if (!filename.length) {
             ui.replaceName = "custom-data";
         } else if (filename.length > 14) {
             ui.replaceName = filename.substr(0, 10) + "_" + filename.substr(filename.lastIndexOf('.'));
         }
 
-        // We can add some data to POST in upload request
-        //ui.addPostData($uploadForm.serializeArray()); // from array
-        //ui.addPostData('original-filename', filename); // .. or as field/value pair
-        // Show info and response when upload completed
         createRowFromUploadItem(ui);
         ui.completeCallback = function(success, data, errorCode) {
             media += "," + data['status'];
         };
-
-        // Updating progress bar value in progress callback
-//                ui.progressCallback = function(percent) {
-//                    $progressBar.css('width', Math.round(percent) + '%');
-//                };
-
     };
 
-
-    ///// Setting up events handlers
-
     // Uploader events
-    $fileInput.on({
+    input_file.on({
         'du.add' : fileAddHandler,
 
         'du.limit' : function() {
@@ -111,10 +85,12 @@ jQuery(function($){
                 data: "suggest="+JSON.stringify(data),
                 success: function(html) {
                     $("#suggest_form").trigger('reset');
-                    $clearBtn.trigger('click');
-                    $(".modal_close").trigger('click');
-
-                    alert(html['res']);
+                    $('#clear_btn').trigger('click');
+                    $("#suggest_div").css('display', 'none')
+                    $("#message_container")
+                        .css('display', 'block')
+                        .animate({opacity: 1, top: '0%'}, 200);
+                    $("#message").html("Ваше объявление успешно размещено");
                     //TODO: callback
                 }
             });
@@ -123,9 +99,9 @@ jQuery(function($){
     });
 
     // Clear button
-    $clearBtn.on('click', function() {
-        $fileInput.duCancelAll();
-        $uploadRows.empty();
+    $('#clear_btn').on('click', function() {
+        input_file.duCancelAll();
+        $('#upload_pic').empty();
     });
     $(document).ready(function(){
         $('#region_suggest').trigger('change');
@@ -148,6 +124,9 @@ jQuery(function($){
             $(this).css('display', 'none');
             $('#overlay').fadeOut(400);
         })
+    });
+    $('body').on('click','#cabinet', function(){
+        window.location = 'cabinet.php';
     });
     $('body').on('click', '#find_btn', function (e) {
         e.preventDefault();
@@ -209,17 +188,28 @@ jQuery(function($){
             success: function(html) {
                 if(html['res'] == 2) {
                     $("#find_form_div").css("display", "none").hide().fadeOut(500);
-                    $("#close_find").trigger("click");
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '6%'}, 200);
+                            .animate({opacity: 1, top: '0%'}, 200);
                     });
                 }
-                else if(html['res'] == 1)
-                    alert("Вы должны активировать свой аккаунт");
-                else
-                    alert("Вы должны зарегистрироваться, чтобы размещать объявления");
+                else if(html['res'] == 1) {
+                    $("#overlay").fadeIn(400, function(){
+                        $("#message_container")
+                            .css('display', 'block')
+                            .animate({opacity: 1, top: '30%'}, 200);
+                    });
+                    $("#message").html("Вы должны активировать свой аккаунт, чтобы размещать объявления");
+                }
+                else {
+                    $("#overlay").fadeIn(400, function(){
+                        $("#message_container")
+                            .css('display', 'block')
+                            .animate({opacity: 1, top: '30%'}, 200);
+                    });
+                    $("#message").html("Вы должны зарегистрироваться, чтобы размещать объявления");
+                }
 
             }
         });
@@ -228,8 +218,11 @@ jQuery(function($){
     $('body').on('submit', '#suggest_form', function (e) {
         e.preventDefault();
         if ($.support.fileSending) {
-            $fileInput.duStart();
+            input_file.duStart();
         }
+    });
+    $('body').on('click','#logotype',function() {
+        window.location = 'index.php';
     });
     $('body').on('submit','#sign_up_form', function (e){
         e.preventDefault();
@@ -246,10 +239,33 @@ jQuery(function($){
             dataType: 'json',
             data: "submit_sign_up="+JSON.stringify(sign_up_data),
             success: function(sup) {
-                alert(sup['res']);
-                $("#sign_up_form").trigger('reset');
-                $(".modal_close").trigger('click');
-                //TODO: callback
+                $('input').css('border','');
+                $('.reg_block').css('display','none');
+                switch(sup['res']){
+                    case 'mail_suc':
+                        $("#sign_up_form").trigger('reset');
+                        $("#hidden_sign_up_form").css('display', 'none')
+                        $("#message_container")
+                            .css('display', 'block')
+                            .animate({opacity: 1, top: '30%'}, 200);
+                        $("#message").html("Для завершения регистрации проверьте почту, которую вы указали при регистрации и проследуйте инструкциям");
+                        break;
+                    case 'unknown':
+                        //Неизвестная ошибка
+                        break;
+                    case 'email_error':
+                        $('#email').css("border", "1px solid red");
+                        $('#email_block').css("display","inline");
+                        break;
+                     case 'login_error':
+                        $('#reg_login').css("border", "1px solid red");
+                        $('#login_block').css("display","inline");
+                        break;
+                      case 'password_error':
+                        $('#reg_password, #password_check').css("border", "1px solid red");
+                        $('#password_check_block').css("display","inline");
+                        break;
+                 }
             }
         });
     });
@@ -266,9 +282,15 @@ jQuery(function($){
             dataType: 'json',
             data: "submit_sign_in="+JSON.stringify(sign_in_data),
             success: function(sup) {
-                $(".modal_close").trigger('click');
                 if(sup['res'] == 1) {
+                    $('input').css('border','');
+                    $('.reg_block').css('display','none');
+                    $(".modal_close").trigger('click');
                     sign_in();
+                }
+                else {
+                    $('#login, #password').css("border", "1px solid red");
+                    $('#auth_block').css("display","inline");
                 }
                 //TODO: callback
             }
