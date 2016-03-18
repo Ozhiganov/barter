@@ -50,7 +50,7 @@
         if($suggest_db->real_query("INSERT INTO advertisements ($fields) VALUES ($values)"))
             echo json_encode(array("res" => "ok"));
         else
-            echo json_encode(array("res" => substr("insert error",1)));
+            echo json_encode(array("res" => "insert error"));
         $suggest_db->close();
         exit();
     }
@@ -130,12 +130,11 @@
         //path to load
         $path = 'img/'.$_COOKIE['id'].'/';
         $tmp_path = 'tmp/';
-        $_FILES['my-file']['name'] = md5(time());
         function resize($file)
         {
            global $tmp_path;
 
-           $max_size = 600;
+           $max_size = 1024;
            if ($file['type'] == 'image/jpeg') {
                $source = imagecreatefromjpeg($file['tmp_name']);
                $extension = ".jpeg";
@@ -180,7 +179,15 @@
         }
 
         $ext = resize( $_FILES['my-file']);
-        $new_path = $path.$_FILES['my-file']['name'].$ext;
+        $user_files = scandir($path);
+        $names = array();
+        foreach($user_files as $val)
+        {
+            $tmp = preg_split("/[.]+/",$val);
+            $names[] = $tmp[0];
+        }
+        sort($names);
+        $new_path = $path.($names[count($names) - 1] + 1).$ext;
         if (!@copy($tmp_path.$_FILES['my-file']['name'], $new_path)) {
             echo json_encode(array('status' => "error",));
             exit();
