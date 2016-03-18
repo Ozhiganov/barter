@@ -24,6 +24,7 @@ if($_GET['act']) {
     <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="js/jquery.damnUploader.js"></script>
     <script type="text/javascript" src="js/handler.js"></script>
+    <script type="text/javascript" src="js/jquery.damnUploader.js"></script>
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/modal.css" media="all">
 </head>
@@ -44,13 +45,14 @@ if($_GET['act']) {
 </div>
 
 <hr>
-
-    <h2>Ваш кабинет</h2>
-    <br>
-    <a href="?act=logout">
-        <button>Выйти</button>
-    </a>
-
-
+<div class="body_container">
+    <div class="main_case">
+        <h2>Ваш кабинет</h2>
+        <br>
+        <a href="?act=logout">
+            <button>Выйти</button>
+        </a>
+    </div>
+</div>
 </body>
 </html>
