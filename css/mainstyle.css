@@ -161,7 +161,7 @@ a{
 .agree_button,.agree_button_mini{
     border: 1px  solid #669933 ;
     border-radius: 6px;
-    background: #66cc66;
+    background: #2fcc71;;
     width: 260px;
     height: 40px;
     font-size: 17px;
@@ -183,9 +183,14 @@ a{
     display: block;
 }
 .agree_button:hover,.agree_button_mini:hover{
-    background-color: #77B557;
+    background-color: #27ae61;
     box-shadow:0 2px 0 #669933;
     border-color: #669933;
+}
+
+.agree_button:active{
+    background-color: #27ae61;
+    padding-top: 2px;
 }
 /*.agree_button:active,.agree_button_mini:active{
     text-shadow: 0 1px 0 rgba(0,0,0,0.25);
