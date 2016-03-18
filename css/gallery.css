@@ -1,0 +1,44 @@
+body {
+    overflow-x: hidden;
+}
+.preview {
+    cursor: pointer;
+}
+.slider {
+    position: absolute;
+    left: -320px;
+    margin-left: 50%;
+    z-index: 2;
+}
+ul {
+    white-space: nowrap;
+    overflow: visible;
+    position: relative;
+    left: 0;
+    transition: left 1s;
+}
+li {
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+    height: 422px;
+}
+li img {
+    border: 10px solid #FFF;
+    box-shadow: 0 3px 6px 0 #999;
+    display: block;
+    height: 300px;
+    opacity: 0.6;
+    margin-top: 50px;
+    transition: height 1s, opacity 0.5s, margin-top 1s;
+}
+
+li:hover img {
+    box-shadow: 0 3px 6px 0 #333;
+}
+
+li.active img {
+    margin-top: 0;
+    height: 500px;
+    opacity: 1;
+}

@@ -1,3 +1,5 @@
+
+
 <?php
 if(!isset($_COOKIE['id']))
     echo("<html><script>window.location = 'index.php'</script></html>");
@@ -15,15 +17,15 @@ if($_GET['act']) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Ваш кабинет</title>
+<head>
+    <meta charset="utf-8" />
     <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery.damnUploader.js"></script>
     <script type="text/javascript" src="js/handler.js"></script>
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/modal.css" media="all">
 </head>
 <body>
 <div id="header">
@@ -40,6 +42,7 @@ if($_GET['act']) {
         </div>
     </div>
 </div>
+
 <hr>
 
     <h2>Ваш кабинет</h2>
