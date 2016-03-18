@@ -39,6 +39,11 @@ jQuery(function($){
     var fileAddHandler = function(e) {
         var ui  = e.uploadItem;
         var filename = ui.file.name || "";
+        if(ui.file.size >= 4194304) {
+            alert("File is too much");
+            e.preventDefault();
+            return ;
+        }
 
         if (!isImgFile(ui.file)) {
             alert("This file is not a picture");
@@ -67,6 +72,7 @@ jQuery(function($){
         },
 
         'du.completed' : function() {
+            alert("lol");
             var data = {
                 'suggest_from': $("#from_topics_of_barter_suggest option:selected").val(),
                 'suggest_to': $("#to_topics_of_barter_suggest option:selected").val(),

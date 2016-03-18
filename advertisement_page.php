@@ -1,3 +1,17 @@
+<?php
+if(isset($_GET['id'])) {
+$advertisement_db = new mysqli("barter", "root", "", "barter_main");
+if ($advertisement_db->connect_errno) {
+    exit();
+}
+$advertisement_req = $advertisement_db->query("SELECT * FROM `advertisements` WHERE `id`='$_GET[id]' LIMIT  0,1");
+$advertisement_info = $advertisement_req->fetch_all(MYSQLI_ASSOC);
+
+$media_str = $advertisement_info[0][media];
+$media = preg_split("/[,]+/",$media_str);
+
+?>
+
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -6,6 +20,7 @@
     <script type="text/javascript" src="js/handler.js"></script>
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/modal.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/gallery.css" media="all">
 </head>
 <body>
 <div id="header">
@@ -24,23 +39,26 @@
 </div>
 <hr>
 <div id="overlay"></div>
+<div class="slider" style="display: none">
+    <ul>
+        <?php
+        $i = 0;
+        foreach($media as $value) {
+            echo "<li id='$i'><img src=' ../" . $value . "''/></li>";
+            $i++;
+        }
+        unset($value);
+        ?>
+    </ul>
+</div>
 <div class="body_container">
     <div class="main_case">
-<?php
-if(isset($_GET['id'])) {
-    $advertisement_db = new mysqli("barter", "root", "", "barter_main");
-    if ($advertisement_db->connect_errno) {
-        exit();
-    }
-    $advertisement_req = $advertisement_db->query("SELECT * FROM `advertisements` WHERE `id`='$_GET[id]' LIMIT  0,1");
-    $advertisement_info = $advertisement_req->fetch_all(MYSQLI_ASSOC);
 
-   /* echo $advertisement_info[0][title];*/
 
+        <?php
     $suggest_id = $advertisement_info[0][suggest_from];
     $suggest_from_req = $advertisement_db->query("SELECT `name` FROM `topics` WHERE `id`='$suggest_id' LIMIT  0,1");
     $suggest_from = $suggest_from_req->fetch_all(MYSQLI_ASSOC);
-   /* echo "<br>From: ".$suggest_from[0][name];*/
 
     $suggest_id = $advertisement_info[0][suggest_to];
     $region_id = $advertisement_info[0][region];
@@ -82,13 +100,17 @@ if(isset($_GET['id'])) {
 
 
 
-    $media_str = $advertisement_info[0][media];
-    $media = preg_split("/[,]+/",$media_str);
-    foreach($media as $value)
-        echo "<img src=' ../". $value . "''/><br>";
+    $i=0;
+    foreach($media as $value) {
+        echo "<img id='$i' class='preview'  src=' ../" . $value . "''/><br>";
+        $i++;
+    }
+    unset($value);
 }
 ?>      </div>
+
         </div>
+
 <!--ФОРМА АВТОРИЗАЦИИ В ОКНЕ-->
 <div id="hidden_sign_in_form" class="modal_div" style="">
     <span class="modal_close">x</span>
@@ -109,7 +131,31 @@ if(isset($_GET['id'])) {
 </div>
 
 
+    <script>
+        (function() {
 
+            $('.preview').on('click', function(){
+                $('.slider').fadeIn(400);
+                $('#'+this.id).addClass("active");
+                var pos = "-"+(this.id * 515)+"px";
+                $("ul").css("left", pos);
+            });
+            $('body').keyup(function(eventObject){
+                if(eventObject.which == 27 && $('.slider').css('display') === 'block')
+                    $('.slider').fadeOut(400);
+            });
+            $("li").on("click", function(){
+                var item = $(this),
+                    pos = "-"+(item.index() * 515)+"px";
+                item.addClass("active");
+                item.siblings().removeClass("active");
+
+                $("ul").css("left", pos);
+
+            });
+
+        })();
+    </script>
 
 <!--ФОРМА РЕГИСТРАЦИИ В ОКНЕ-->
 <div id="hidden_sign_up_form"  class="modal_div" style="top: 15%; width:270px; ">
