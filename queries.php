@@ -130,7 +130,7 @@
         //path to load
         $path = 'img/'.$_COOKIE['id'].'/';
         $tmp_path = 'tmp/';
-
+        $_FILES['my-file']['name'] = md5(time());
         function resize($file)
         {
            global $tmp_path;
@@ -180,10 +180,11 @@
         }
 
         $ext = resize( $_FILES['my-file']);
-        $new_path = $path.count(scandir($path)).$ext;
-        if (!@copy($tmp_path.$_FILES['my-file']['name'], $path.count(scandir($path)).$ext))
-           echo json_encode(array('status' => "error",));
-
+        $new_path = $path.$_FILES['my-file']['name'].$ext;
+        if (!@copy($tmp_path.$_FILES['my-file']['name'], $new_path)) {
+            echo json_encode(array('status' => "error",));
+            exit();
+        }
         echo json_encode(array('status' => $new_path));
         unlink($tmp_path.$_FILES['my-file']['name']);
     }
