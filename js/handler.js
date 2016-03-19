@@ -39,7 +39,7 @@ jQuery(function($){
     var fileAddHandler = function(e) {
         var ui  = e.uploadItem;
         var filename = ui.file.name || "";
-        if(ui.file.size >= 4194304) {
+        if(ui.file.size >= 8194304) {
             alert("File is too much");
             e.preventDefault();
             return ;
@@ -72,7 +72,6 @@ jQuery(function($){
         },
 
         'du.completed' : function() {
-            alert("lol");
             var data = {
                 'suggest_from': $("#from_topics_of_barter_suggest option:selected").val(),
                 'suggest_to': $("#to_topics_of_barter_suggest option:selected").val(),
@@ -97,6 +96,7 @@ jQuery(function($){
                         .css('display', 'block')
                         .animate({opacity: 1, top: '0%'}, 200);
                     $("#message").html("Ваше объявление успешно размещено");
+                    media = "";
                     //TODO: callback
                 }
             });
@@ -158,6 +158,7 @@ jQuery(function($){
         });
 
     });
+
     $('body').on('change','#region_find',function(e){
         e.preventDefault();
         var region_id = $("#region_find option:selected").val();

@@ -124,26 +124,27 @@
     $find_query .= "ORDER BY `publish_date` DESC";
     $find_result = $find_db->query($find_query);
     $find_result_array = $find_result->fetch_all(MYSQLI_ASSOC);
-    setlocale(LC_ALL, "Russian");
-    foreach ($find_result_array as $val) {
-        if($region_name == null) {
-            $current_region_req = $find_db->query("SELECT `name` FROM `regions` WHERE `id`='$val[region]' LIMIT 0,1");
-            $current_region_arr = $current_region_req->fetch_all(MYSQLI_ASSOC);
-            $current_region = $current_region_arr[0][name];
-        }
-        else
-            $current_region = $region_name;
-        if($city_name == null) {
-            $current_city_req = $find_db->query("SELECT `name` FROM `cities` WHERE `id`='$val[city]' LIMIT 0,1");
-            $current_city_arr = $current_city_req->fetch_all(MYSQLI_ASSOC);
-            $current_city = $current_city_arr[0][name];
-        }
-        else
-            $current_city = $city_name;
+    if(count($find_result_array) == 0)
+        echo "<span>По вашему запросу ничего не найдено</span>";
+    else {
+        setlocale(LC_ALL, "Russian");
+        foreach ($find_result_array as $val) {
+            if ($region_name == null) {
+                $current_region_req = $find_db->query("SELECT `name` FROM `regions` WHERE `id`='$val[region]' LIMIT 0,1");
+                $current_region_arr = $current_region_req->fetch_all(MYSQLI_ASSOC);
+                $current_region = $current_region_arr[0][name];
+            } else
+                $current_region = $region_name;
+            if ($city_name == null) {
+                $current_city_req = $find_db->query("SELECT `name` FROM `cities` WHERE `id`='$val[city]' LIMIT 0,1");
+                $current_city_arr = $current_city_req->fetch_all(MYSQLI_ASSOC);
+                $current_city = $current_city_arr[0][name];
+            } else
+                $current_city = $city_name;
 
-        $media = preg_split("/[,]+/",$val[media]);
+            $media = preg_split("/[,]+/", $val[media]);
 
-        echo "
+            echo "
             <a href=advertisement_page.php?id=" . $val[id] . "><h3>" . $val[title] . "</h3></a>
         <div class='pictures_box'>
 
@@ -158,6 +159,7 @@
                 Дата: " . strftime("%d.%m.%Y %H:%M", $val[publish_date]) . "<br></p>
         </div>
         <hr>";
+        }
     }
     $find_db->close();
     ?>

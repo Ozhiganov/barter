@@ -137,12 +137,14 @@ $media = preg_split("/[,]+/",$media_str);
             $('.preview').on('click', function(){
                 $('.slider').fadeIn(400);
                 $('#'+this.id).addClass("active");
+                $('#'+this.id).trigger('click');
                 var pos = "-"+(this.id * 515)+"px";
                 $("ul").css("left", pos);
             });
             $('body').keyup(function(eventObject){
-                if(eventObject.which == 27 && $('.slider').css('display') === 'block')
+                if(eventObject.which == 27 && $('.slider').css('display') === 'block') {
                     $('.slider').fadeOut(400);
+                }
             });
             $("li").on("click", function(){
                 var item = $(this),
