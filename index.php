@@ -17,7 +17,8 @@
             </div>
 
             <div id="tools">
-                <a id="show_sign_up">Зарегистрироваться</a> |
+                <a id="show_sign_up">Зарегистрироваться</a>
+                <a id="personal_cabinet">Личный кабинет</a>|
                 <a id="show_sign_in">Войти</a>
                 <a id="sign_out">Выйти</a>
             </div>
@@ -189,7 +190,6 @@
                 <div id="upload_pic" class="pictures_box">
                     <div class="functional_button" style="height: 24px;  border-radius:4px;   width: 290px; margin-top: 16px;overflow: hidden;"><input type="file"   id="file_input" name="my-file"/></div>
                 </div>
-
                 <input class="agree_button" style="margin-left: 0; border-radius:4px;  height:30px; width: 360px;" type="submit" value="Разместить объявление"/>
                 <input type="button" id="clear_btn"  class="functional_button" style="height:30px; border-radius:4px;" value="Убрать фотографии"/>
             </form>
@@ -248,6 +248,9 @@
                     <span class='msg'><?php echo $message; ?></span>
                 </form>
             </div>
+
+
+
 
  </div>
 

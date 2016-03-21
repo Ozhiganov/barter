@@ -312,6 +312,10 @@ jQuery(function($){
         });
 
     });
+    $('body').on('click', '#personal_cabinet', function(){
+        <!--Кликаем, переходим в личный кабинет -->
+        window.location.href = "cabinet.php"
+    });
     $('body').on('click', '#show_sign_in', function() {
         $("#overlay").fadeIn(320, function(){
             $("#hidden_sign_in_form")
