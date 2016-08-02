@@ -81,7 +81,7 @@
     </form>
     <div id="search_area">
     <?php
-    $find_db = new mysqli("barter", "root", "", "barter_main");
+    $find_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
     if ($find_db->connect_errno) {
         exit();
     }

@@ -1,13 +1,14 @@
 <?php
+require_once "config.php";
 //You need to perform this only one time
-$create_db = new mysqli("barter", "root", "");
+$create_db = new mysqli(HOST, DB_USER, DB_PASS);
 if ($create_db->connect_errno) {
     echo "Не удалось подключиться:".$create_db->connect_error;
     exit();
 }
 $create_db->query("CREATE DATABASE IF NOT EXISTS `barter_main` CHARACTER SET utf8 COLLATE utf8_general_ci");
 $create_db->close();
-$create_table = new mysqli("barter","root","","barter_main");
+$create_table = new mysqli(HOST, DB_USER, DB_PASS,"barter_main");
 if ($create_table->connect_errno) {
     echo "Не удалось подключиться:".$create_table->connect_error;
     exit();

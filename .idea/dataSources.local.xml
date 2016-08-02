@@ -4,9 +4,8 @@
     <data-source name="MySQL - main@localhost" uuid="4e95d834-cf56-4509-adb9-5b3c9285ee0a">
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <schema-pattern>main.*</schema-pattern>
-      <default-schemas>main.*</default-schemas>
+      <introspection-scope>main:*</introspection-scope>
+      <resolve-scope>main:*</resolve-scope>
     </data-source>
   </component>
 </project>
-

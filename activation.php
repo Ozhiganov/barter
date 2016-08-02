@@ -27,7 +27,7 @@
  */
 
 
-$connect_main_db = mysqli_connect('barter', 'root', '', 'barter_main');//Подключение к основной базе данных
+$connect_main_db = mysqli_connect(HOST, DB_USER, DB_PASS, 'barter_main');//Подключение к основной базе данных
 if (!$connect_main_db){
     die('Ошибка подключения (' . mysqli_connect_errno() . ') '
         . mysqli_connect_error());

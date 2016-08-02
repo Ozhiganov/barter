@@ -3,7 +3,7 @@ if ($_POST['submit_sign_up']){
     $sign_up_fields = json_decode($_POST['submit_sign_up']);
 
     if(strcasecmp($sign_up_fields->password,$sign_up_fields->password_check) == 0) {
-        $connect_main_db = mysqli_connect('barter', 'root', '', 'barter_main');
+        $connect_main_db = mysqli_connect(HOST, DB_USER, DB_PASS, 'barter_main');
         if (!$connect_main_db) {
             die('Ошибка подключения (' . mysqli_connect_errno() . ') '
                 . mysqli_connect_error());
@@ -41,7 +41,7 @@ if ($_POST['submit_sign_up']){
 
 if($_POST['submit_sign_in']){
     $sign_in_data = json_decode($_POST['submit_sign_in']);
-    $connect_main_db = mysqli_connect('barter', 'root', '', 'barter_main');//Подключение к основной базе данных
+    $connect_main_db = mysqli_connect(HOST, DB_USER, DB_PASS, 'barter_main');//Подключение к основной базе данных
     if (!$connect_main_db){
         die('Ошибка подключения (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
     }
@@ -66,7 +66,7 @@ if($_POST['check_status']) {
     if(!isset($_COOKIE['id']))
         echo json_encode(array("res" => 0));
     else {
-        $user_db = new mysqli("barter", "root", "", "barter_main");
+        $user_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
         if ($user_db->connect_errno) {
             exit();
         }

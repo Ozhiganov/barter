@@ -1,6 +1,6 @@
 <?php
 if(isset($_GET['id'])) {
-$advertisement_db = new mysqli("barter", "root", "", "barter_main");
+$advertisement_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
 if ($advertisement_db->connect_errno) {
     exit();
 }

@@ -3,7 +3,7 @@
 
     function barter_topics()
     {
-        $topics = new mysqli("barter", "root", "", "barter_main");
+        $topics = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
 
         if ($topics->connect_errno) {
             //TODO: Handling the connection error
@@ -22,7 +22,7 @@
 
   function region_selection()
   {
-      $region = new mysqli("barter","root","","barter_main");
+      $region = new mysqli(HOST, DB_USER, DB_PASS,"barter_main");
 
       if ($region->connect_errno)
       {

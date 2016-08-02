@@ -15,7 +15,7 @@
         }
         unset($val);
         //connection to db
-        $suggest_db = new mysqli("barter", "root", "", "barter_main");
+        $suggest_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
         if ($suggest_db->connect_errno) {
             $result = array( "res" => "Не удалось подключиться:".$suggest_db->connect_error);
             exit();
@@ -57,7 +57,7 @@
     if($_POST['region'])
     {
         $region_id = json_decode($_POST['region'])->region;
-        $region_db = new mysqli("barter", "root", "", "barter_main");
+        $region_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
         if ($region_db->connect_errno) {
             exit();
         }
@@ -75,7 +75,7 @@
     }
     if($_POST['find']){
         $find_fields = json_decode($_POST['find']);
-        $find_db = new mysqli("barter", "root", "", "barter_main");
+        $find_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
         if ($find_db->connect_errno) {
             exit();
         }
