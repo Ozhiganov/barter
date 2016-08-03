@@ -1,15 +1,11 @@
 <?php
+require_once "api/db_connection.php";
 if(isset($_GET['id'])) {
-$advertisement_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
-if ($advertisement_db->connect_errno) {
-    exit();
-}
-$advertisement_req = $advertisement_db->query("SELECT * FROM `advertisements` WHERE `id`='$_GET[id]' LIMIT  0,1");
-$advertisement_info = $advertisement_req->fetch_all(MYSQLI_ASSOC);
+    $advertisement_req = $db->query("SELECT * FROM `advertisements` WHERE `id`='$_GET[id]' LIMIT  0,1");
+    $advertisement_info = $advertisement_req->fetch_all(MYSQLI_ASSOC);
 
-$media_str = $advertisement_info[0][media];
-$media = preg_split("/[,]+/",$media_str);
-
+    $media_str = $advertisement_info[0][media];
+    $media = preg_split("/[,]+/",$media_str);
 ?>
 
 <!DOCTYPE html>
@@ -56,16 +52,16 @@ $media = preg_split("/[,]+/",$media_str);
 
 
         <?php
-    $suggest_id = $advertisement_info[0][suggest_from];
-    $suggest_from_req = $advertisement_db->query("SELECT `name` FROM `topics` WHERE `id`='$suggest_id' LIMIT  0,1");
-    $suggest_from = $suggest_from_req->fetch_all(MYSQLI_ASSOC);
+            $suggest_id = $advertisement_info[0][suggest_from];
+            $suggest_from_req = $db -> query("SELECT `name` FROM `topics` WHERE `id`='$suggest_id' LIMIT  0,1");
+            $suggest_from = $suggest_from_req -> fetch_all(MYSQLI_ASSOC);
 
-    $suggest_id = $advertisement_info[0][suggest_to];
-    $region_id = $advertisement_info[0][region];
-    $city_id = $advertisement_info[0][city];
-    $bd_req = $advertisement_db->query("SELECT topics.name AS topic, cities.name AS city, regions.name AS region
+            $suggest_id = $advertisement_info[0][suggest_to];
+            $region_id = $advertisement_info[0][region];
+            $city_id = $advertisement_info[0][city];
+            $bd_req = $db -> query("SELECT topics.name AS topic, cities.name AS city, regions.name AS region
       FROM topics, cities, regions WHERE topics.id ='$suggest_id' AND cities.id ='$city_id' AND regions.id = '$region_id' LIMIT 0,1");
-    $bd = $bd_req->fetch_all(MYSQLI_ASSOC);
+            $bd = $bd_req -> fetch_all(MYSQLI_ASSOC);
     //Текстовая информация
     ?>
 

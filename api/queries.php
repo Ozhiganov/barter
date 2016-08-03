@@ -1,5 +1,5 @@
 <?php
-    include "main.php";
+require_once "main.php";
     if($_POST['suggest'])
     {
         //query string creation except city_id and publish_date
@@ -14,18 +14,12 @@
                 $values = $values.$param->$val."','";
         }
         unset($val);
-        //connection to db
-        $suggest_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
-        if ($suggest_db->connect_errno) {
-            $result = array( "res" => "Не удалось подключиться:".$suggest_db->connect_error);
-            exit();
-        }
         //calculation city_id
         $city = $param->city;
         $region_id = $param->region;
         $city_id = 0;
 
-        $cities_query = $suggest_db->query("SELECT name,id FROM cities WHERE region_id='$region_id'");
+        $cities_query = $db->query("SELECT name,id FROM cities WHERE region_id='$region_id'");
         $cities_array = $cities_query->fetch_all(MYSQLI_ASSOC);
 
         foreach($cities_array as $val)
@@ -36,33 +30,28 @@
         unset($val);
         if($city_id == 0)
         {
-            $suggest_db->real_query("INSERT INTO cities (name,region_id) VALUES ('$city','$region_id')");
-            $city_query = $suggest_db->query("SELECT id FROM cities WHERE name='$city' AND region_id='$region_id'");
+            $db->real_query("INSERT INTO cities (name,region_id) VALUES ('$city','$region_id')");
+            $city_query = $db->query("SELECT id FROM cities WHERE name='$city' AND region_id='$region_id'");
             $city_array = $city_query->fetch_all(MYSQLI_ASSOC);
             $city_id = $city_array[0][id];
         }
-        $name_req = $suggest_db->query("SELECT `name` FROM `users` WHERE `id` LIKE '".$_COOKIE['id']."' LIMIT 0,1");
+        $name_req = $db->query("SELECT `name` FROM `users` WHERE `id` LIKE '".$_COOKIE['id']."' LIMIT 0,1");
         $name = $name_req->fetch_all(MYSQLI_ASSOC);
         $fields = $fields."city,publish_date,user_id,name";
         $values = $values.$city_id."','".time()."','".$_COOKIE['id']."','".$name[0][name]."'";
         //query to db
 
-        if($suggest_db->real_query("INSERT INTO advertisements ($fields) VALUES ($values)"))
+        if($db->real_query("INSERT INTO advertisements ($fields) VALUES ($values)"))
             echo json_encode(array("res" => "ok"));
         else
             echo json_encode(array("res" => "insert error"));
-        $suggest_db->close();
-        exit();
     }
     if($_POST['region'])
     {
         $region_id = json_decode($_POST['region'])->region;
-        $region_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
-        if ($region_db->connect_errno) {
-            exit();
-        }
+        
         $cities_query = "SELECT name FROM cities WHERE region_id='$region_id'";
-        $query_result = $region_db->query($cities_query);
+        $query_result = $db->query($cities_query);
         $cities_result = $query_result->fetch_all(MYSQLI_ASSOC);
         $cities_array = array();
         foreach ($cities_result as $val) {
@@ -70,15 +59,10 @@
             }
         unset($val);
         echo json_encode($cities_array);
-        $region_db->close();
-        exit();
     }
     if($_POST['find']){
         $find_fields = json_decode($_POST['find']);
-        $find_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
-        if ($find_db->connect_errno) {
-            exit();
-        }
+
         $find_query = "SELECT id,media,title,publish_date,city,region  FROM advertisements WHERE suggest_from='$find_fields->find_from' AND suggest_to='$find_fields->find_to'";
         if(strnatcasecmp("", $find_fields->keywords) != 0)
             $find_query .= " AND LOWER(title) LIKE '%".strtolower($find_fields->keywords)."%'";
@@ -100,20 +84,20 @@
             $city_name = null;
         }
 
-        $find_result = $find_db->query($find_query);
+        $find_result = $db->query($find_query);
         $find_result_array = $find_result->fetch_all(MYSQLI_ASSOC);
         setlocale(LC_ALL, "Russian");
         $json_result = array();
         foreach ($find_result_array as $val) {
             if($region_name == null) {
-                $current_region_req = $find_db->query("SELECT `name` FROM `regions` WHERE `id`='$val[region]' LIMIT 0,1");
+                $current_region_req = $db->query("SELECT `name` FROM `regions` WHERE `id`='$val[region]' LIMIT 0,1");
                 $current_region_arr = $current_region_req->fetch_all(MYSQLI_ASSOC);
                 $current_region = $current_region_arr[0][name];
             }
             else
                 $current_region = $region_name;
             if($city_name == null) {
-                $current_city_req = $find_db->query("SELECT `name` FROM `cities` WHERE `id`='$val[city]' LIMIT 0,1");
+                $current_city_req = $db->query("SELECT `name` FROM `cities` WHERE `id`='$val[city]' LIMIT 0,1");
                 $current_city_arr = $current_city_req->fetch_all(MYSQLI_ASSOC);
                 $current_city = $current_city_arr[0][name];
             }
@@ -122,14 +106,12 @@
             array_push($json_result, array("id" => $val[id],"city" => $current_city,"title" => $val[title],"region" => $current_region, "media" => $val[media], "date" => strftime("%d.%m.%Y %H:%M", $val[publish_date])));
         }
         echo json_encode($json_result);
-        $find_db->close();
-        exit();
     }
 
     if(!empty($_FILES) && !empty($_FILES['my-file'])) {
         //path to load
-        $path = 'img/'.$_COOKIE['id'].'/';
-        $tmp_path = 'tmp/';
+        $path = '../img/'.$_COOKIE['id'].'/';
+        $tmp_path = '../tmp/';
         function resize($file)
         {
            global $tmp_path;

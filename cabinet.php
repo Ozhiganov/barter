@@ -1,20 +1,7 @@
-
-
 <?php
-if(!isset($_COOKIE['id']))
+require_once "api/db_connection.php";
+if(!isset($_COOKIE['id'])) {
     echo("<html><script>window.location = 'index.php'</script></html>");
-
-if($_GET['act']) {
-    $action = $_GET['act'];
-
-    switch($action){
-        case 'logout':{
-            setcookie("id", "", time() -60*60*12, "/");
-            echo("<html><script>window.location = 'index.php'</script></html>"); exit();
-            break;}
-
-        default: echo("<html><script>window.location = 'cabinet.php'</script></html>");
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -49,9 +36,33 @@ if($_GET['act']) {
     <div class="main_case">
         <h2>Ваш кабинет</h2>
         <br>
-        <a href="?act=logout">
-            <button>Выйти</button>
-        </a>
+        <?php
+        $find_query = "SELECT `id`,`media`,`title`,`publish_date`,`city`,`region`  FROM `advertisements` WHERE `user_id`='$_COOKIE[id]' ORDER BY `publish_date` DESC";
+
+        $find_result = $db->query($find_query);
+        $find_result_array = $find_result->fetch_all(MYSQLI_ASSOC);
+        if(count($find_result_array) == 0)
+            echo "<span>У вас нет объявлений</span>";
+        else {
+            setlocale(LC_ALL, "Russian");
+            foreach ($find_result_array as $val) {
+                $media = preg_split("/[,]+/", $val[media]);
+
+                echo "
+            <a href=advertisement_page.php?id=" . $val[id] . "><h3>" . $val[title] . "</h3></a>
+        <div class='pictures_box'>
+
+        <img src='$media[0]'/></div>
+        <div style='
+        width: 400px;
+        height: 200px;'>
+             <p>
+                Дата: " . strftime("%d.%m.%Y %H:%M", $val[publish_date]) . "<br></p>
+        </div>
+        <hr>";
+            }
+        }
+        ?>
     </div>
 </div>
 </body>

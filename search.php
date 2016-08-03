@@ -1,3 +1,6 @@
+<?php
+require_once "api/main.php";
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -44,8 +47,7 @@
                 <td>
                     <label>Меняю</label>
                     <select id="from_topics_of_barter_find" name="from">
-                        <?php include_once("main.php");
-                        barter_topics(); ?>
+                        <?php barter_topics(); ?>
                     </select>
                 </td>
                 <td></td>
@@ -81,15 +83,11 @@
     </form>
     <div id="search_area">
     <?php
-    $find_db = new mysqli(HOST, DB_USER, DB_PASS, "barter_main");
-    if ($find_db->connect_errno) {
-        exit();
-    }
     $find_query = "SELECT `id`,`media`,`title`,`publish_date`,`city`,`region`  FROM `advertisements` WHERE `suggest_from`='$_GET[from]' AND `suggest_to`='$_GET[to]'";
 
-    $from_topic_req = $find_db->query("SELECT `name` FROM `topics` WHERE `id`='$_GET[from]' LIMIT  0,1");
+    $from_topic_req = $db->query("SELECT `name` FROM `topics` WHERE `id`='$_GET[from]' LIMIT  0,1");
     $from_topic = $from_topic_req->fetch_all(MYSQLI_ASSOC);
-    $to_topic_req = $find_db->query("SELECT `name` FROM `topics` WHERE `id`='$_GET[to]' LIMIT  0,1");
+    $to_topic_req = $db->query("SELECT `name` FROM `topics` WHERE `id`='$_GET[to]' LIMIT  0,1");
     $to_topic = $to_topic_req->fetch_all(MYSQLI_ASSOC);
 
     echo "<script>
@@ -102,13 +100,13 @@
     }
     if($_GET['region'] != 0) {
         $find_query .= " AND `region`='$_GET[region]'";
-        $region_query = $find_db->query("SELECT `name` FROM `regions` WHERE `id`='$_GET[region]' LIMIT 0,1");
+        $region_query = $db->query("SELECT `name` FROM `regions` WHERE `id`='$_GET[region]' LIMIT 0,1");
         $region_array = $region_query->fetch_all(MYSQLI_ASSOC);
         $region_name = $region_array[0][name];
         echo "<script>$('#region_find').val('$_GET[region]')</script>";
         if(strnatcasecmp("", $_GET['city']) != 0) {
             echo "<script>$('#city_selected_find').val('$_GET[city]')</script>";
-            $city_query = $find_db->query("SELECT `id` FROM `cities` WHERE `name`='$_GET[city]' AND `region_id`='$_GET[region]' LIMIT 0,1");
+            $city_query = $db->query("SELECT `id` FROM `cities` WHERE `name`='$_GET[city]' AND `region_id`='$_GET[region]' LIMIT 0,1");
             $city_array = $city_query->fetch_all(MYSQLI_ASSOC);
             $city_id = $city_array[0][id];
             $find_query .= " AND city='$city_id'";
@@ -122,7 +120,7 @@
         $city_name = null;
     }
     $find_query .= "ORDER BY `publish_date` DESC";
-    $find_result = $find_db->query($find_query);
+    $find_result = $db->query($find_query);
     $find_result_array = $find_result->fetch_all(MYSQLI_ASSOC);
     if(count($find_result_array) == 0)
         echo "<span>По вашему запросу ничего не найдено</span>";
@@ -130,13 +128,13 @@
         setlocale(LC_ALL, "Russian");
         foreach ($find_result_array as $val) {
             if ($region_name == null) {
-                $current_region_req = $find_db->query("SELECT `name` FROM `regions` WHERE `id`='$val[region]' LIMIT 0,1");
+                $current_region_req = $db->query("SELECT `name` FROM `regions` WHERE `id`='$val[region]' LIMIT 0,1");
                 $current_region_arr = $current_region_req->fetch_all(MYSQLI_ASSOC);
                 $current_region = $current_region_arr[0][name];
             } else
                 $current_region = $region_name;
             if ($city_name == null) {
-                $current_city_req = $find_db->query("SELECT `name` FROM `cities` WHERE `id`='$val[city]' LIMIT 0,1");
+                $current_city_req = $db->query("SELECT `name` FROM `cities` WHERE `id`='$val[city]' LIMIT 0,1");
                 $current_city_arr = $current_city_req->fetch_all(MYSQLI_ASSOC);
                 $current_city = $current_city_arr[0][name];
             } else
@@ -161,7 +159,6 @@
         <hr>";
         }
     }
-    $find_db->close();
     ?>
     </div>
     <!--ФОРМА АВТОРИЗАЦИИ В ОКНЕ-->

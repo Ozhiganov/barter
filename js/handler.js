@@ -11,7 +11,7 @@ jQuery(function($){
     var media = "";
     var input_file = $('#file_input');
     input_file.damnUploader({
-        url: 'queries.php',
+        url: 'api/queries.php',
         fieldName:  'my-file',
         limit: 5,
         dataType: 'json',
@@ -85,7 +85,7 @@ jQuery(function($){
             };
             $.ajax({
                 type: 'POST',
-                url: 'queries.php',
+                url: 'api/queries.php',
                 dataType: 'json',
                 data: "suggest="+JSON.stringify(data),
                 success: function(html) {
@@ -113,7 +113,7 @@ jQuery(function($){
         $('#region_suggest').trigger('change');
         $.ajax({
             type: 'POST',
-            url: 'identification.php',
+            url: 'api/identification.php',
             dataType: 'json',
             data: "check_status= ",
             success: function(html) {
@@ -145,7 +145,7 @@ jQuery(function($){
         };
         $.ajax({
             type: 'POST',
-            url: 'queries.php',
+            url: 'api/queries.php',
             dataType: 'json',
             data: "region="+JSON.stringify(data),
             success: function(html) {
@@ -171,7 +171,7 @@ jQuery(function($){
             };
             $.ajax({
                 type: 'POST',
-                url: 'queries.php',
+                url: 'api/queries.php',
                 dataType: 'json',
                 data: "region=" + JSON.stringify(data),
                 success: function (html) {
@@ -189,7 +189,7 @@ jQuery(function($){
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'identification.php',
+            url: 'api/identification.php',
             dataType: 'json',
             data: "check_status= ",
             success: function(html) {
@@ -221,7 +221,7 @@ jQuery(function($){
             }
         });
 
-    })
+    });
     $('body').on('submit', '#suggest_form', function (e) {
         e.preventDefault();
         if ($.support.fileSending) {
@@ -242,7 +242,7 @@ jQuery(function($){
         };
         $.ajax({
             type: 'POST',
-            url: 'identification.php',
+            url: 'api/identification.php',
             dataType: 'json',
             data: "submit_sign_up="+JSON.stringify(sign_up_data),
             success: function(sup) {
@@ -281,11 +281,11 @@ jQuery(function($){
         var sign_in_data ={
             'login': $("#login").val(),
             'password': $("#password").val()
-        }
+        };
 
         $.ajax({
             type: 'POST',
-            url: 'identification.php',
+            url: 'api/identification.php',
             dataType: 'json',
             data: "submit_sign_in="+JSON.stringify(sign_in_data),
             success: function(sup) {
@@ -307,12 +307,13 @@ jQuery(function($){
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'identification.php',
+            url: 'api/identification.php',
             dataType: 'json',
             data: "sign_out= ",
             success: function(sup) {
                 if(sup['res'] == 1){
                     sign_out();
+                    window.location = 'index.php';
                 }
                 //TODO: callback
             }

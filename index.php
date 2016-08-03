@@ -1,3 +1,6 @@
+<?php 
+require_once "api/main.php";
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -61,8 +64,7 @@
                         <td>
                             <label>Меняю</label>
                             <select id="from_topics_of_barter_find" name="from">
-                                <?php include_once("main.php");
-                                barter_topics(); ?>
+                                <?php barter_topics(); ?>
                             </select>
                         </td>
                         <td></td>
@@ -118,7 +120,7 @@
                     <tr>
                         <td style=""><label>Хочу обменять</label><br>
                             <select id="from_topics_of_barter_suggest">
-                                <?php include_once("../main.php"); barter_topics(); ?>
+                                <?php barter_topics(); ?>
                             </select>
                         </td>
                          <td></td>
