@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae002334-bc90-461e-af14-f95888c61a7e" name="Default" comment="Revert &quot;Stylez+&quot;&#10;&#10;This reverts commit 2efca7f0a774490e07191965fe7a704f2bed81fb.&#10;&#10;# Conflicts:&#10;#&#9;index.php&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/db_connection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="ae002334-bc90-461e-af14-f95888c61a7e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/activation.php" afterPath="$PROJECT_DIR$/activation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/advertisement_page.php" afterPath="$PROJECT_DIR$/advertisement_page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cabinet.php" afterPath="$PROJECT_DIR$/cabinet.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/handler.js" afterPath="$PROJECT_DIR$/js/handler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search.php" afterPath="$PROJECT_DIR$/search.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/api/config.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db_creation.php" afterPath="$PROJECT_DIR$/api/db_creation.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/identification.php" afterPath="$PROJECT_DIR$/api/identification.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/main.php" afterPath="$PROJECT_DIR$/api/main.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/queries.php" afterPath="$PROJECT_DIR$/api/queries.php" />
     </list>
     <ignored path="barter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,7 +89,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cabinet.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cabinet.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cabinet.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="423">
@@ -110,6 +98,20 @@
                 <marker date="1470188201896" expanded="true" signature="1024:1123" placeholder="SELECT `id`,... advertisements" />
                 <marker date="1470188201896" expanded="true" signature="1024:1136" placeholder="SELECT `id`,... advertisements" />
                 <marker date="1470188201896" expanded="true" signature="1024:1165" placeholder="SELECT `id`,... advertisements" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activation.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/activation.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+              <folding>
+                <marker date="1470185945758" expanded="true" signature="802:853" placeholder="SELECT `id` users" />
+                <marker date="1470185945758" expanded="true" signature="926:992" placeholder="SELECT `id` users" />
+                <marker date="1470185945758" expanded="true" signature="1069:1125" placeholder="UPDATE `user... " />
               </folding>
             </state>
           </provider>
@@ -499,12 +501,20 @@
       <option name="presentableId" value="Default" />
       <updated>1456428624551</updated>
       <workItem from="1468920351223" duration="608000" />
-      <workItem from="1470181684733" duration="6569000" />
+      <workItem from="1470181684733" duration="6786000" />
     </task>
+    <task id="LOCAL-00001" summary="refactoring">
+      <created>1470188275778</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1470188275778</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7177000" />
+    <option name="totallyTimeSpent" value="7394000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -512,6 +522,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.223125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289256" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11649016" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.89686686" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -544,6 +555,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LIMIT_HISTORY" value="false" />
+    <MESSAGE value="refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -925,18 +938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/activation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <marker date="1470185945758" expanded="true" signature="802:853" placeholder="SELECT `id` users" />
-            <marker date="1470185945758" expanded="true" signature="926:992" placeholder="SELECT `id` users" />
-            <marker date="1470185945758" expanded="true" signature="1069:1125" placeholder="UPDATE `user... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/main.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1069,6 +1070,18 @@
             <marker date="1470188201896" expanded="true" signature="1024:1123" placeholder="SELECT `id`,... advertisements" />
             <marker date="1470188201896" expanded="true" signature="1024:1136" placeholder="SELECT `id`,... advertisements" />
             <marker date="1470188201896" expanded="true" signature="1024:1165" placeholder="SELECT `id`,... advertisements" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/activation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding>
+            <marker date="1470185945758" expanded="true" signature="802:853" placeholder="SELECT `id` users" />
+            <marker date="1470185945758" expanded="true" signature="926:992" placeholder="SELECT `id` users" />
+            <marker date="1470185945758" expanded="true" signature="1069:1125" placeholder="UPDATE `user... " />
           </folding>
         </state>
       </provider>
