@@ -16,7 +16,7 @@ require_once "api/main.php";
         <div id="center">
 
             <div id="logotype">
-
+                <span style="">α</span>
             </div>
 
             <div id="tools">
@@ -25,13 +25,14 @@ require_once "api/main.php";
         </div>
     </div>
 </div>
-<hr>
+
 <!--ОВЕРЛЕЙ БЕГИн-->
 <div id="overlay"></div>
 <!--ОВЕРЛЕЙ ЭНД-->
 
 <div class="body_container">
  <div class="main_case">
+     <br>
      <br>
      <div id="text_box">
         <h3>Бесплатная доска бартерных объявлений</h3>
@@ -104,8 +105,8 @@ require_once "api/main.php";
      <br>
     <div id="suggest_area">
         <!--ФОРМА ДОБАВЛЕНИЯ ОБЪЯВЛЕНИЯ В ОКНЕ-->
-        <div id="suggest_div" class="modal_div" style="width:900px">
-            <span class="modal_close">x</span>
+        <div id="suggest_div" class="modal_div" style="width:900px; position:absolute;    padding: 25px 35px 60px 35px;">
+            <span class="modal_close">✕</span>
             <h2>Ваше объявление</h2>
             <form id="suggest_form">
                 <table id="suggest_table">
@@ -186,13 +187,14 @@ require_once "api/main.php";
                     </tr>
 
                 </table>
-                <div class="functional_button" style="height: 24px;  border-radius:4px;   width: 290px; margin-top: 16px;overflow: hidden;"><input type="file"   id="file_input" name="my-file"/></div>
+                <div class="functional_button" style="    width: 360px;  margin-left: 0px; height: 30px;  border-radius:4px;   margin-top: 16px;overflow: hidden;">
+                    <input style="background: none; border:none; color:#fff;" type="file"   id="file_input" name="my-file"/></div>
                 <div id="upload_pic" class="pictures_box">
 
                 </div>
 
                 <input class="agree_button" style="margin-left: 0; border-radius:4px;  height:30px; width: 360px;" type="submit" value="Разместить объявление"/>
-                <input type="button" id="clear_btn"  class="functional_button" style="height:30px; border-radius:4px;" value="Убрать фотографии"/>
+                <input type="button" id="clear_btn"  class="functional_button" style=" margin-left: 40px;height:30px; border-radius:4px;" value="Убрать фотографии"/>
             </form>
         </div>
     </div>
@@ -200,7 +202,7 @@ require_once "api/main.php";
 
        <!--ФОРМА АВТОРИЗАЦИИ В ОКНЕ-->
         <div id="hidden_sign_in_form" class="modal_div" style="">
-            <span class="modal_close">x</span>
+            <span class="modal_close">✕</span>
             <h2>Вход</h2>
             <form id="sign_in_form" method="post">
                  <p>
@@ -223,7 +225,7 @@ require_once "api/main.php";
 
         <!--ФОРМА РЕГИСТРАЦИИ В ОКНЕ-->
         <div id="hidden_sign_up_form"  class="modal_div" style="top: 15%; width:270px; ">
-            <span class="modal_close" style="right: 20px;">x</span>
+            <span class="modal_close" style="right: 20px;">✕</span>
             <h2>Регистрация</h2>
             <form id="sign_up_form">
                 <label for="username">Имя</label><br>

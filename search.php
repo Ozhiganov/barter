@@ -16,7 +16,7 @@ require_once "api/main.php";
         <div id="center">
 
             <div id="logotype">
-
+                <span style="">α</span>
             </div>
 
             <div id="tools">
@@ -83,6 +83,7 @@ require_once "api/main.php";
     </form>
     <div id="search_area">
     <?php
+
     $find_query = "SELECT `id`,`media`,`title`,`publish_date`,`city`,`region`  FROM `advertisements` WHERE `suggest_from`='$_GET[from]' AND `suggest_to`='$_GET[to]'";
 
     $from_topic_req = $db->query("SELECT `name` FROM `topics` WHERE `id`='$_GET[from]' LIMIT  0,1");

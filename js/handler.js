@@ -94,7 +94,7 @@ jQuery(function($){
                     $("#suggest_div").css('display', 'none')
                     $("#message_container")
                         .css('display', 'block')
-                        .animate({opacity: 1, top: '0%'}, 200);
+                        .animate({opacity: 1, top: '9%'}, 200);
                     $("#message").html("Ваше объявление успешно размещено");
                     media = "";
                     //TODO: callback
@@ -198,7 +198,7 @@ jQuery(function($){
                     $("#overlay").fadeIn(400, function(){
                         $("#suggest_div")
                             .css('display', 'block')
-                            .animate({opacity: 1, top: '0%'}, 200);
+                            .animate({opacity: 1, top: '9%'}, 200);
                     });
                 }
                 else if(html['res'] == 1) {

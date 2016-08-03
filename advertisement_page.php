@@ -24,7 +24,7 @@ if(isset($_GET['id'])) {
         <div id="center">
 
             <div id="logotype">
-
+                <span style="">α</span>
             </div>
 
             <div id="tools">
